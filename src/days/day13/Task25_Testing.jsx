@@ -29,6 +29,39 @@ const suites = [
       'deletes a task',
     ],
   },
+  {
+    file: 'src/days/day08/Task15_ContextApi.test.jsx',
+    cases: [
+      'starts in light mode',
+      'toggles theme across all consuming components at once',
+    ],
+  },
+  {
+    file: 'src/days/day09/Task18_FormValidation.test.jsx',
+    cases: [
+      'shows required-field errors on empty submit',
+      'flags an invalid email format',
+      'flags mismatched passwords',
+      'submits successfully with valid input',
+    ],
+  },
+  {
+    file: 'src/days/day10/Task20_EcommerceCart.test.jsx',
+    cases: [
+      'starts with an empty cart',
+      'adds an item to the cart and shows the total',
+      'increments quantity when adding the same item twice',
+      'removes an item from the cart',
+    ],
+  },
+  {
+    file: 'src/days/day13/Task24_StateManagement.test.jsx',
+    cases: [
+      'renders todos from the store',
+      'adds a todo via the store action',
+      'removes a todo via the store action',
+    ],
+  },
 ]
 
 export default function Task25_Testing() {
