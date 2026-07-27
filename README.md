@@ -4,9 +4,12 @@ A running log of a 5-week React learning roadmap: components, hooks, side
 effects, routing, and mini projects — building toward a small portfolio of
 real, working apps.
 
+**🔗 Live demo:** https://piyushdwivedi2901.github.io/Long-Term-Internship/
+
 Every task lives under `src/days/dayXX/` and is wired into the sidebar nav in
 `src/App.jsx`, so the whole history stays browsable in one running app —
-open it and click through the sidebar to see all 26 tasks live.
+open the live demo (or run it locally) and click through the sidebar to see
+all 26 tasks live.
 
 ## Running it locally
 
@@ -29,7 +32,7 @@ npm test         # run the test suite (Task 25)
 - **State management (Task 24):** Zustand, chosen over Redux Toolkit for
   minimal boilerplate.
 - **Testing (Task 25):** Vitest + React Testing Library. Test files sit next
-  to the components they cover (`*.test.jsx`).
+  to the components they cover (`*.test.jsx`) — 21 passing tests across 6 suites.
 
 ## Progress
 
@@ -66,7 +69,7 @@ npm test         # run the test suite (Task 25)
 
 ### Week 5: Stretch Goals
 - [x] Day 13 — Task 24: State management rebuild (Zustand)
-- [x] Day 13 — Task 25: Testing (Vitest + React Testing Library, 8 passing tests)
+- [x] Day 13 — Task 25: Testing (Vitest + React Testing Library, 21 passing tests)
 - [x] Day 13 — Task 26: Performance (`useMemo`, `useCallback`, `React.memo`)
 
 **All 26 tasks complete.** 🎉
