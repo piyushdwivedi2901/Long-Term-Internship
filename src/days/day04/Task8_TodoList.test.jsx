@@ -32,4 +32,18 @@ describe('Task8_TodoList', () => {
     fireEvent.click(deleteButtons[1])
     expect(screen.queryByText('Practice hooks')).not.toBeInTheDocument()
   })
+
+  it('filters to only active tasks', () => {
+    render(<Task8_TodoList />)
+    fireEvent.click(screen.getByText('Active'))
+    expect(screen.queryByText('Finish React basics')).not.toBeInTheDocument()
+    expect(screen.getByText('Practice hooks')).toBeInTheDocument()
+  })
+
+  it('filters to only done tasks', () => {
+    render(<Task8_TodoList />)
+    fireEvent.click(screen.getByRole('button', { name: 'Done' }))
+    expect(screen.getByText('Finish React basics')).toBeInTheDocument()
+    expect(screen.queryByText('Practice hooks')).not.toBeInTheDocument()
+  })
 })
