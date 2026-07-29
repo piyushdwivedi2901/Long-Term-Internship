@@ -1,4 +1,5 @@
 import { MemoryRouter, Routes, Route, Link, useLocation } from 'react-router-dom'
+import { Home as HomeIcon, Info, Mail } from 'lucide-react'
 
 /**
  * Day 8 — Task 16: React Router Basics
@@ -9,33 +10,52 @@ import { MemoryRouter, Routes, Route, Link, useLocation } from 'react-router-dom
  * real browser URL. In a standalone app, swap in <BrowserRouter>.
  */
 function Home() {
-  return <p>Welcome to the home page of this mini multi-page demo.</p>
+  return (
+    <div>
+      <h4><HomeIcon size={15} className="icon-inline" />Home</h4>
+      <p>Welcome to the home page of this mini multi-page demo.</p>
+    </div>
+  )
 }
 function About() {
-  return <p>This is a small app built to practice React Router basics.</p>
+  return (
+    <div>
+      <h4><Info size={15} className="icon-inline" />About</h4>
+      <p>This is a small app built to practice React Router basics — client-side navigation with no full page reloads.</p>
+    </div>
+  )
 }
 function Contact() {
-  return <p>Reach out at hello@example.com.</p>
+  return (
+    <div>
+      <h4><Mail size={15} className="icon-inline" />Contact</h4>
+      <p>Reach out at hello@example.com.</p>
+    </div>
+  )
 }
 
 function Nav() {
   const location = useLocation()
   const links = [
-    { to: '/', label: 'Home' },
-    { to: '/about', label: 'About' },
-    { to: '/contact', label: 'Contact' },
+    { to: '/', label: 'Home', icon: HomeIcon },
+    { to: '/about', label: 'About', icon: Info },
+    { to: '/contact', label: 'Contact', icon: Mail },
   ]
   return (
     <nav className="router-nav">
-      {links.map((l) => (
-        <Link
-          key={l.to}
-          to={l.to}
-          className={location.pathname === l.to ? 'active' : ''}
-        >
-          {l.label}
-        </Link>
-      ))}
+      {links.map((l) => {
+        const Icon = l.icon
+        return (
+          <Link
+            key={l.to}
+            to={l.to}
+            className={location.pathname === l.to ? 'active' : ''}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}
+          >
+            <Icon size={13} /> {l.label}
+          </Link>
+        )
+      })}
     </nav>
   )
 }

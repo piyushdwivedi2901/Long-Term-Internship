@@ -35,4 +35,10 @@ describe('Task18_FormValidation', () => {
     fireEvent.click(screen.getByText('Sign up'))
     expect(screen.getByText('✅ Account created successfully!')).toBeInTheDocument()
   })
+
+  it('shows a live password strength label as you type', () => {
+    render(<Task18_FormValidation />)
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'Str0ng!Pass99' } })
+    expect(screen.getByText(/strong/i)).toBeInTheDocument()
+  })
 })
