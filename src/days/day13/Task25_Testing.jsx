@@ -67,8 +67,9 @@ const suites = [
 export default function Task25_Testing() {
   return (
     <div className="task-section">
-      <h2>Task 25: Testing (React Testing Library + Vitest)</h2>
-      <p>Run the full suite with <code>npm test</code>. Coverage:</p>
+      <p className="task-eyebrow">Testing</p>
+      <h2>Testing</h2>
+      <p className="task-goal">Vitest + React Testing Library. Run <code>npm test</code> — 21 tests across 6 suites, checked on every push by the CI workflow before it deploys.</p>
       {suites.map((s) => (
         <div key={s.file} className="card" style={{ marginBottom: 16 }}>
           <h4>{s.file}</h4>

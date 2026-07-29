@@ -50,7 +50,9 @@ export default function Task23_KanbanBoard() {
 
   return (
     <div className="task-section">
-      <h2>Task 23: Kanban / Task Board</h2>
+      <p className="task-eyebrow">Mini Project</p>
+      <h2>Kanban / Task Board</h2>
+      <p className="task-goal">Drag a card between columns using the native HTML5 drag-and-drop API — no external library needed.</p>
       <div className="kanban-board">
         {Object.entries(columns).map(([colId, col]) => (
           <div

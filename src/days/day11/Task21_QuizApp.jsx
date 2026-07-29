@@ -97,10 +97,14 @@ export default function Task21_QuizApp() {
 
   return (
     <div className="task-section">
-      <h2>Task 21: Quiz App</h2>
+      <p className="task-eyebrow">Mini Project</p>
+      <h2>Quiz App</h2>
+      <p className="task-goal">Five live trivia questions from Open Trivia DB, a 15-second timer per question, and a final score — auto-advances if time runs out.</p>
 
-      {status === 'loading' && <p>Loading questions…</p>}
-      {status === 'error' && <p className="error-text">Couldn't load questions. Try again shortly.</p>}
+      {status === 'loading' && (
+        <div className="spinner"><div className="spinner-circle" /><span>Loading questions…</span></div>
+      )}
+      {status === 'error' && <p className="error-text">Couldn't load questions — the trivia API might be rate-limited. Try again shortly.</p>}
 
       {status === 'playing' && questions[current] && (
         <div className="quiz-box">
@@ -125,10 +129,10 @@ export default function Task21_QuizApp() {
       )}
 
       {status === 'finished' && (
-        <div className="card">
-          <h4>Quiz complete!</h4>
-          <p>Your score: {score} / {questions.length}</p>
-          <button onClick={restart}>Play again</button>
+        <div className="card" style={{ maxWidth: 380 }}>
+          <h4>Quiz complete</h4>
+          <p>Score: {score} / {questions.length}</p>
+          <button className="primary" onClick={restart}>Play again</button>
         </div>
       )}
     </div>

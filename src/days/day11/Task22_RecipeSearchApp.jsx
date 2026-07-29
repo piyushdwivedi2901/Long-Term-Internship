@@ -31,11 +31,13 @@ function SearchPage() {
     <div>
       <form onSubmit={search} className="search-form">
         <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search a recipe…" />
-        <button type="submit">Search</button>
+        <button className="primary" type="submit">Search</button>
       </form>
-      {status === 'loading' && <p>Searching…</p>}
-      {status === 'error' && <p className="error-text">Search failed. Try again.</p>}
-      {status === 'success' && meals.length === 0 && <p className="empty-state">No recipes found.</p>}
+      {status === 'loading' && (
+        <div className="spinner"><div className="spinner-circle" /><span>Searching…</span></div>
+      )}
+      {status === 'error' && <p className="error-text">Search failed — try again.</p>}
+      {status === 'success' && meals.length === 0 && <p className="empty-state">No recipes match "{query}" — try another search term.</p>}
       <div className="recipe-grid">
         {meals.map((m) => (
           <Link to={`/recipe/${m.idMeal}`} key={m.idMeal} className="recipe-card">
@@ -97,7 +99,9 @@ function RecipeDetailPage() {
 export default function Task22_RecipeSearchApp() {
   return (
     <div className="task-section">
-      <h2>Task 22: Recipe Search App</h2>
+      <p className="task-eyebrow">Mini Project</p>
+      <h2>Recipe Search App</h2>
+      <p className="task-goal">Search TheMealDB, click a result to open its detail route, and read the full ingredient list and instructions.</p>
       <MemoryRouter initialEntries={['/']}>
         <div className="router-page">
           <Routes>

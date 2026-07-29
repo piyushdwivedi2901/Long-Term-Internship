@@ -23,11 +23,12 @@ export default function Task24_StateManagement() {
 
   return (
     <div className="task-section">
-      <h2>Task 24: State Management (Zustand)</h2>
-      <p className="hint">Same to-do behavior as Task 8, but state lives in a Zustand store.</p>
+      <p className="task-eyebrow">State Management</p>
+      <h2>State Management (Zustand)</h2>
+      <p className="task-goal">Task 8's to-do app, rebuilt on a Zustand store instead of local <code>useState</code> — chosen over Redux Toolkit for its near-zero boilerplate.</p>
       <form onSubmit={handleAdd} className="todo-form">
         <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Add a task…" />
-        <button type="submit">Add</button>
+        <button className="primary" type="submit">Add</button>
       </form>
       <ul className="todo-list">
         {todos.map((todo) => (

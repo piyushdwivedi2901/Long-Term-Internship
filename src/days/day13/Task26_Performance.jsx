@@ -39,9 +39,14 @@ export default function Task26_Performance() {
 
   return (
     <div className="task-section">
-      <h2>Task 26: Performance</h2>
+      <p className="task-eyebrow">Performance</p>
+      <h2>Performance</h2>
+      <p className="task-goal">
+        <code>useMemo</code>, <code>useCallback</code>, and <code>React.memo</code> working together so an unrelated
+        state change doesn't re-run an expensive calculation or re-render a list.
+      </p>
       <p>
-        Unrelated re-render trigger: <button onClick={() => setTick((t) => t + 1)}>Tick ({tick})</button>
+        Unrelated re-render trigger: <button className="primary" onClick={() => setTick((t) => t + 1)}>Tick ({tick})</button>
       </p>
       <p className="hint">
         Clicking "Tick" re-renders this component, but thanks to <code>useMemo</code>{' '}
