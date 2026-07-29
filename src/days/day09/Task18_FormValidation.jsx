@@ -53,7 +53,9 @@ export default function Task18_FormValidation() {
 
   return (
     <div className="task-section">
-      <h2>Task 18: Form Validation</h2>
+      <p className="task-eyebrow">Form Validation</p>
+      <h2>Form Validation</h2>
+      <p className="task-goal">Manual validation — required fields, an email-format check, and a password-match check — so the rules stay fully visible rather than hidden in a library.</p>
       {submitted && <p className="success-text">✅ Account created successfully!</p>}
       <form onSubmit={handleSubmit} noValidate className="simple-form">
         {fields.map((f) => (
@@ -69,7 +71,7 @@ export default function Task18_FormValidation() {
             {errors[f.name] && <span className="field-error">{errors[f.name]}</span>}
           </div>
         ))}
-        <button type="submit">Sign up</button>
+        <button className="primary" type="submit">Sign up</button>
       </form>
     </div>
   )

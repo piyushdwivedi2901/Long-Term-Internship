@@ -46,7 +46,9 @@ function Panel({ children }) {
 export default function Task15_ContextApi() {
   return (
     <div className="task-section">
-      <h2>Task 15: Context API</h2>
+      <p className="task-eyebrow">Context API</p>
+      <h2>Context API</h2>
+      <p className="task-goal">Theme lives in one <code>ThemeProvider</code> at the top; three nested components below read and update it without a single prop passed between them.</p>
       <ThemeProvider>
         <Panel>
           <Header />

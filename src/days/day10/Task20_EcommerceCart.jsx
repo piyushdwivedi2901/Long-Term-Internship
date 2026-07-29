@@ -53,7 +53,9 @@ export default function Task20_EcommerceCart() {
 
   return (
     <div className="task-section">
-      <h2>Task 20: E-commerce Cart</h2>
+      <p className="task-eyebrow">Mini Project</p>
+      <h2>E-commerce Cart</h2>
+      <p className="task-goal">Add items, adjust quantity inline, remove items, and watch the total recompute — all derived state, no duplicated totals to keep in sync.</p>
       <div className="split-layout">
         <div>
           <h4>Catalog</h4>

@@ -47,7 +47,9 @@ export default function Task13_LiftingStateUp() {
 
   return (
     <div className="task-section">
-      <h2>Task 13: Lifting State Up</h2>
+      <p className="task-eyebrow">Lifting State Up</p>
+      <h2>Lifting State Up</h2>
+      <p className="task-goal"><code>ProductList</code> and <code>CartTotal</code> are siblings — the cart state they both need lives one level up, in their shared parent.</p>
       <div className="split-layout">
         <ProductList cart={cart} onAdd={handleAdd} />
         <CartTotal cart={cart} />

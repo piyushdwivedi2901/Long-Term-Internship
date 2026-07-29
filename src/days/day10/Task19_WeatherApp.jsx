@@ -63,17 +63,21 @@ export default function Task19_WeatherApp() {
 
   return (
     <div className="task-section">
-      <h2>Task 19: Weather App</h2>
+      <p className="task-eyebrow">Mini Project</p>
+      <h2>Weather App</h2>
+      <p className="task-goal">Live weather for any city — geocoded and fetched from Open-Meteo, a free API that needs no key.</p>
       <form onSubmit={search} className="search-form">
         <input
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Enter a city name…"
         />
-        <button type="submit">Search</button>
+        <button className="primary" type="submit">Search</button>
       </form>
 
-      {status === 'loading' && <p>Loading weather…</p>}
+      {status === 'loading' && (
+        <div className="spinner"><div className="spinner-circle" /><span>Loading weather…</span></div>
+      )}
       {status === 'error' && <p className="error-text">{errorMsg}</p>}
       {status === 'success' && weather && (
         <div className="card weather-card">

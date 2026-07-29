@@ -52,7 +52,9 @@ function ProductDetailPage() {
 export default function Task17_DynamicRoutes() {
   return (
     <div className="task-section">
-      <h2>Task 17: Dynamic Routes</h2>
+      <p className="task-eyebrow">Dynamic Routes</p>
+      <h2>Dynamic Routes</h2>
+      <p className="task-goal">A product list links to <code>/product/:productId</code>; the detail page reads that id straight out of the URL with <code>useParams</code>.</p>
       <MemoryRouter initialEntries={['/']}>
         <div className="router-page">
           <Routes>

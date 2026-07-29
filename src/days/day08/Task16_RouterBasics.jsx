@@ -43,7 +43,9 @@ function Nav() {
 export default function Task16_RouterBasics() {
   return (
     <div className="task-section">
-      <h2>Task 16: React Router Basics</h2>
+      <p className="task-eyebrow">React Router</p>
+      <h2>React Router Basics</h2>
+      <p className="task-goal">Three routes, one nav bar that highlights the active link. Uses <code>MemoryRouter</code> since this demo is nested inside the outer sidebar shell.</p>
       <MemoryRouter initialEntries={['/']}>
         <Nav />
         <div className="router-page">

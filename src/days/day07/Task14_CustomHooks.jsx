@@ -14,11 +14,15 @@ export default function Task14_CustomHooks() {
 
   return (
     <div className="task-section">
-      <h2>Task 14: Custom Hooks</h2>
+      <p className="task-eyebrow">Custom Hooks</p>
+      <h2>Custom Hooks</h2>
+      <p className="task-goal">Two reusable hooks — <code>useFetch</code> for GET requests, <code>useLocalStorage</code> for a persisted value — extracted out of components so any component can reuse them.</p>
 
       <h4>useFetch(url)</h4>
-      {status === 'loading' && <p>Loading albums…</p>}
-      {status === 'error' && <p className="error-text">Failed to load albums.</p>}
+      {status === 'loading' && (
+        <div className="spinner"><div className="spinner-circle" /><span>Loading albums…</span></div>
+      )}
+      {status === 'error' && <p className="error-text">Couldn't load albums.</p>}
       {status === 'success' && (
         <ul>
           {albums.map((a) => (
