@@ -19,7 +19,9 @@ const movies = [
 export default function Task3_ListRendering() {
   return (
     <div className="task-section">
-      <h2>Task 3: List Rendering</h2>
+      <p className="task-eyebrow">Rendering Lists</p>
+      <h2>List Rendering</h2>
+      <p className="task-goal">An array of ten movies rendered with <code>.map()</code>, each row keyed by a stable id rather than array index.</p>
       <ul className="movie-list">
         {movies.map((movie) => (
           <li key={movie.id} className="movie-item">

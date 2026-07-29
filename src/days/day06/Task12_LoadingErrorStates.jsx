@@ -34,7 +34,9 @@ export default function Task12_LoadingErrorStates() {
 
   return (
     <div className="task-section">
-      <h2>Task 12: Loading & Error States</h2>
+      <p className="task-eyebrow">Loading &amp; Error States</p>
+      <h2>Loading &amp; Error States</h2>
+      <p className="task-goal">A request that fails about 40% of the time on purpose, so the loading spinner, error message, and retry button all get real exercise.</p>
 
       {status === 'loading' && (
         <div className="spinner" role="status" aria-label="Loading">
@@ -45,16 +47,16 @@ export default function Task12_LoadingErrorStates() {
 
       {status === 'error' && (
         <div className="error-box">
-          <p className="error-text">Something went wrong fetching the todo.</p>
+          <p className="error-text" style={{ margin: 0 }}>Couldn't fetch that todo.</p>
           <button onClick={() => setAttempt((a) => a + 1)}>Retry</button>
         </div>
       )}
 
       {status === 'success' && todo && (
-        <div className="card">
+        <div className="card" style={{ maxWidth: 380 }}>
           <p><strong>#{todo.id}</strong> {todo.title}</p>
           <p>{todo.completed ? '✅ Completed' : '⏳ Not completed'}</p>
-          <button onClick={() => setAttempt((a) => a + 1)}>Load another</button>
+          <button className="primary" onClick={() => setAttempt((a) => a + 1)}>Load another</button>
         </div>
       )}
     </div>

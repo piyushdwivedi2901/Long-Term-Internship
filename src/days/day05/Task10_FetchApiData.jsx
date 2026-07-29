@@ -34,9 +34,13 @@ export default function Task10_FetchApiData() {
 
   return (
     <div className="task-section">
-      <h2>Task 10: Fetch API Data</h2>
-      {status === 'loading' && <p>Loading posts…</p>}
-      {status === 'error' && <p className="error-text">Failed to load posts.</p>}
+      <p className="task-eyebrow">Data Fetching</p>
+      <h2>Fetch API Data</h2>
+      <p className="task-goal">Six posts pulled from JSONPlaceholder on mount, with a cancellation guard so a fast unmount can't set state on a gone component.</p>
+      {status === 'loading' && (
+        <div className="spinner"><div className="spinner-circle" /><span>Loading posts…</span></div>
+      )}
+      {status === 'error' && <p className="error-text">Couldn't load posts. Check your connection and try again.</p>}
       {status === 'success' && (
         <ul className="post-list">
           {posts.map((post) => (

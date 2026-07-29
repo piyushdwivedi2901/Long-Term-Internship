@@ -6,7 +6,9 @@
 export default function Task1_StaticProfileCard() {
   return (
     <div className="task-section">
-      <h2>Task 1: Static Profile Card</h2>
+      <p className="task-eyebrow">Components &amp; JSX</p>
+      <h2>Static Profile Card</h2>
+      <p className="task-goal">Render a name, photo, and bio using hardcoded JSX — no props yet, everything lives inside the component.</p>
       <div className="card">
         <img
           className="card-avatar"

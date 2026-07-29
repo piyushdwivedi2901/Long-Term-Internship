@@ -23,13 +23,12 @@ export default function Task9_UseEffectBasics() {
 
   return (
     <div className="task-section">
-      <h2>Task 9: useEffect Basics</h2>
-      <p>
-        Click the button and watch the browser tab title update. Open the
-        console to see the mount log.
-      </p>
+      <p className="task-eyebrow">useEffect</p>
+      <h2>useEffect Basics</h2>
+      <p className="task-goal">One effect runs once on mount and logs to the console; another syncs the browser tab title to state on every change.</p>
       <p className="counter-value">{count}</p>
-      <button onClick={() => setCount((c) => c + 1)}>Click me</button>
+      <button className="primary" onClick={() => setCount((c) => c + 1)}>Click me</button>
+      <p className="hint" style={{ marginTop: 12 }}>Watch the tab title change, and check the console for the mount log.</p>
     </div>
   )
 }

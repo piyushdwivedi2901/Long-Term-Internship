@@ -15,7 +15,9 @@ export default function Task7_SimpleForm() {
 
   return (
     <div className="task-section">
-      <h2>Task 7: Simple Form</h2>
+      <p className="task-eyebrow">Controlled Inputs</p>
+      <h2>Simple Form</h2>
+      <p className="task-goal">Two controlled fields, both driven by one <code>onChange</code> handler and mirrored live below as you type.</p>
       <form onSubmit={(e) => e.preventDefault()} className="simple-form">
         <div className="field-row">
           <label htmlFor="name">Name</label>

@@ -11,7 +11,9 @@ export default function Task6_ToggleSwitch() {
 
   return (
     <div className={`task-section ${darkMode ? 'dark-panel' : ''}`}>
-      <h2>Task 6: Toggle Switch</h2>
+      <p className="task-eyebrow">Boolean State</p>
+      <h2>Toggle Switch</h2>
+      <p className="task-goal">Two independent on/off states — a password visibility toggle and a dark-mode switch that restyles this panel.</p>
 
       <div className="field-row">
         <label htmlFor="pw">Password</label>

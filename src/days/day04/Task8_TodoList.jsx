@@ -37,14 +37,16 @@ export default function Task8_TodoList() {
 
   return (
     <div className="task-section">
-      <h2>Task 8: To-Do List</h2>
+      <p className="task-eyebrow">Immutable Array State</p>
+      <h2>To-Do List</h2>
+      <p className="task-goal">Add, complete, and delete tasks — each action replaces the array immutably rather than mutating it in place.</p>
       <form onSubmit={addTodo} className="todo-form">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Add a task..."
         />
-        <button type="submit">Add</button>
+        <button className="primary" type="submit">Add</button>
       </form>
       <ul className="todo-list">
         {todos.map((todo) => (
@@ -64,9 +66,9 @@ export default function Task8_TodoList() {
         ))}
       </ul>
       {todos.length === 0 ? (
-        <p className="empty-state">No tasks — add one above.</p>
+        <p className="empty-state">Nothing here yet — add your first task above.</p>
       ) : (
-        <p className="todo-footer">{remaining} task(s) remaining</p>
+        <p className="todo-footer">{remaining} task{remaining === 1 ? '' : 's'} remaining</p>
       )}
     </div>
   )

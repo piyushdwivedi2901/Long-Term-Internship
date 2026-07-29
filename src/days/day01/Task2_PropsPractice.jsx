@@ -41,7 +41,9 @@ const people = [
 export default function Task2_PropsPractice() {
   return (
     <div className="task-section">
-      <h2>Task 2: Props Practice</h2>
+      <p className="task-eyebrow">Components &amp; JSX</p>
+      <h2>Props Practice</h2>
+      <p className="task-goal">The same card, made reusable. One <code>&lt;ProfileCard /&gt;</code> component, rendered four times with different props.</p>
       <div className="card-grid">
         {people.map((person) => (
           <ProfileCard

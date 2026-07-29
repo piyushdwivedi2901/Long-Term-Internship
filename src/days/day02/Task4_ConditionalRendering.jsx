@@ -12,30 +12,32 @@ export default function Task4_ConditionalRendering() {
   // if/else style — computed before render
   let statusLabel
   if (isLoggedIn) {
-    statusLabel = 'You are logged in'
+    statusLabel = 'Signed in'
   } else {
-    statusLabel = 'You are logged out'
+    statusLabel = 'Signed out'
   }
 
   return (
     <div className="task-section">
-      <h2>Task 4: Conditional Rendering</h2>
+      <p className="task-eyebrow">Conditional Rendering</p>
+      <h2>Conditional Rendering</h2>
+      <p className="task-goal">The same UI branching three ways: an if/else assignment, a ternary, and a short-circuit <code>&amp;&amp;</code>.</p>
 
       <p>{statusLabel}</p>
 
       {/* Ternary */}
-      <button onClick={() => setIsLoggedIn((v) => !v)}>
-        {isLoggedIn ? 'Logout' : 'Login'}
+      <button className="primary" onClick={() => setIsLoggedIn((v) => !v)}>
+        {isLoggedIn ? 'Log out' : 'Log in'}
       </button>
 
       {/* && short-circuit rendering — only shown when logged in */}
       {isLoggedIn && (
-        <p className="welcome-msg">Welcome back! Here is your dashboard.</p>
+        <p className="welcome-msg">Welcome back — here's your dashboard.</p>
       )}
 
       {/* && with a numeric condition */}
       {notifications > 0 && (
-        <p className="badge">🔔 You have {notifications} new notifications</p>
+        <p className="badge">🔔 {notifications} new notification{notifications === 1 ? '' : 's'}</p>
       )}
       <button onClick={() => setNotifications(0)} disabled={notifications === 0}>
         Clear notifications
