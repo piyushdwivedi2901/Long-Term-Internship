@@ -6,9 +6,15 @@ import { useEffect, useState } from 'react'
  */
 export function useFetch(url) {
   const [data, setData] = useState(null)
-  const [status, setStatus] = useState('loading')
+  const [status, setStatus] = useState(url ? 'loading' : 'idle')
 
   useEffect(() => {
+    if (!url) {
+      setStatus('idle')
+      setData(null)
+      return
+    }
+
     let cancelled = false
     setStatus('loading')
     setData(null)
