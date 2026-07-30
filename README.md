@@ -22,17 +22,26 @@ npm test         # run the test suite (Task 25)
 
 ## Tech notes
 
-- **Bundler:** Vite + React 18
+- **Bundler:** Vite + React 18, icon system via `lucide-react`
+- **Design:** an ink-navy/amber "git commit log" aesthetic — the sidebar is
+  a literal commit graph, one node per day — with IBM Plex Mono for
+  structural elements and Inter for body copy.
 - **Routing tasks (16, 17, 22):** use `react-router-dom`'s `MemoryRouter`
   since these mini-apps are embedded inside the outer sidebar shell —
   swap in `BrowserRouter` if extracting one as a standalone app.
-- **Live public APIs used (no keys required):** JSONPlaceholder (Tasks 10–12),
-  Open-Meteo (Task 19 — weather), Open Trivia DB (Task 21 — quiz),
-  TheMealDB (Task 22 — recipes).
+- **Live public APIs used (no keys required):** JSONPlaceholder (Tasks
+  10–12, joined posts+authors), Open-Meteo (Task 19 — current weather +
+  3-day forecast), Open Trivia DB (Task 21 — quiz, category/difficulty
+  aware), TheMealDB (Task 22 — recipe search + category filter + favorites).
 - **State management (Task 24):** Zustand, chosen over Redux Toolkit for
-  minimal boilerplate.
+  minimal boilerplate — the store owns both the todos and the active filter.
+- **Custom hooks (`src/hooks/`):** `useFetch`, `useLocalStorage`,
+  `useDebounce` — built once, reused across Tasks 14, 22, and beyond.
 - **Testing (Task 25):** Vitest + React Testing Library. Test files sit next
-  to the components they cover (`*.test.jsx`) — 21 passing tests across 6 suites.
+  to the components they cover (`*.test.jsx`) — 29 passing tests across 6 suites.
+- **CI/CD:** every push to `main` runs the full test suite, builds, and
+  deploys to GitHub Pages automatically (`.github/workflows/deploy.yml`) —
+  a failing test blocks the deploy.
 
 ## Progress
 
@@ -69,7 +78,7 @@ npm test         # run the test suite (Task 25)
 
 ### Week 5: Stretch Goals
 - [x] Day 13 — Task 24: State management rebuild (Zustand)
-- [x] Day 13 — Task 25: Testing (Vitest + React Testing Library, 21 passing tests)
+- [x] Day 13 — Task 25: Testing (Vitest + React Testing Library, 29 passing tests)
 - [x] Day 13 — Task 26: Performance (`useMemo`, `useCallback`, `React.memo`)
 
 **All 26 tasks complete.** 🎉

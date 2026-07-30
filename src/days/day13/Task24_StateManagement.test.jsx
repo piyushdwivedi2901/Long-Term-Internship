@@ -7,6 +7,7 @@ describe('Task24_StateManagement (Zustand)', () => {
   beforeEach(() => {
     // Reset the store between tests since Zustand state persists across renders
     useTodoStore.setState({
+      filter: 'all',
       todos: [
         { id: 1, text: 'Learn Zustand basics', done: true },
         { id: 2, text: 'Rebuild the to-do app with it', done: false },
@@ -32,5 +33,12 @@ describe('Task24_StateManagement (Zustand)', () => {
     render(<Task24_StateManagement />)
     fireEvent.click(screen.getAllByLabelText('Delete task')[0])
     expect(screen.queryByText('Learn Zustand basics')).not.toBeInTheDocument()
+  })
+
+  it('filters using store-owned filter state', () => {
+    render(<Task24_StateManagement />)
+    fireEvent.click(screen.getByRole('button', { name: 'Active' }))
+    expect(screen.queryByText('Learn Zustand basics')).not.toBeInTheDocument()
+    expect(screen.getByText('Rebuild the to-do app with it')).toBeInTheDocument()
   })
 })
