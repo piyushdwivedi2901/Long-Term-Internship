@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RefreshCw, User } from 'lucide-react'
 
 /**
@@ -16,7 +16,12 @@ export default function Task10_FetchApiData() {
   const [status, setStatus] = useState('idle')
   const [refreshKey, setRefreshKey] = useState(0)
 
-  const load = useCallback(() => {
+  // The fetch + cancellation-guard logic lives directly in the effect
+  // (rather than in a separately defined callback that's only ever
+  // invoked once, immediately, for its cleanup return) — this keeps the
+  // mount → fetch → cleanup relationship visible in one place, and
+  // matches the same cancelled-flag pattern used in hooks/useFetch.js.
+  useEffect(() => {
     let cancelled = false
     setStatus('loading')
 
@@ -38,9 +43,7 @@ export default function Task10_FetchApiData() {
     return () => {
       cancelled = true
     }
-  }, [])
-
-  useEffect(() => load(), [load, refreshKey])
+  }, [refreshKey])
 
   return (
     <div className="task-section">

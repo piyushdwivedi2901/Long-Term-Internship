@@ -12,13 +12,20 @@ import { Clock, Terminal, Play, Pause } from 'lucide-react'
  */
 export default function Task9_UseEffectBasics() {
   const [count, setCount] = useState(0)
-  const [mountLog, setMountLog] = useState([])
+  const [mounted, setMounted] = useState(false)
   const [time, setTime] = useState(new Date())
   const [running, setRunning] = useState(true)
 
-  // Effect 1 — runs once on mount (empty dependency array)
+  // Effect 1 — runs once on mount (empty dependency array). Mount and
+  // unmount are logged the same way, to the same place (the console) —
+  // an earlier version pushed the mount event into UI state while the
+  // unmount event only went to console.log, which meant two different
+  // logging mechanisms were doing the same conceptual job inconsistently.
+  // `mounted` here is just a small on-screen confirmation that the effect
+  // fired; the actual log lives in the console for both events.
   useEffect(() => {
-    setMountLog((log) => [...log, `Mounted at ${new Date().toLocaleTimeString()}`])
+    console.log(`Task9_UseEffectBasics mounted at ${new Date().toLocaleTimeString()}`)
+    setMounted(true)
     return () => console.log('Task9_UseEffectBasics unmounted')
   }, [])
 
@@ -68,10 +75,10 @@ export default function Task9_UseEffectBasics() {
       <p className="hint" style={{ marginTop: 10 }}>Watch the browser tab title change as you click.</p>
 
       <hr className="section-divider" />
-      <p className="task-eyebrow"><Terminal size={12} className="icon-inline" />Mount effect log</p>
-      <ul className="todo-list" style={{ maxWidth: 320 }}>
-        {mountLog.map((entry, i) => <li key={i}><span>{entry}</span></li>)}
-      </ul>
+      <p className="task-eyebrow"><Terminal size={12} className="icon-inline" />Mount effect</p>
+      <p className="hint">
+        {mounted ? '✅ Effect fired on mount.' : 'Waiting for mount effect…'} Open devtools console to see the mount/unmount log lines.
+      </p>
     </div>
   )
 }
