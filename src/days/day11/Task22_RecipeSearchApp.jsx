@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MemoryRouter, Routes, Route, Link, useParams, useNavigate } from 'react-router-dom'
 import { Heart, Search } from 'lucide-react'
 import { useLocalStorage } from '../../hooks/useLocalStorage.js'
@@ -24,6 +24,11 @@ function SearchPage() {
   const [categories, setCategories] = useState([])
   const [category, setCategory] = useState('')
   const [favorites, setFavorites] = useFavorites()
+  // Same race-condition guard as Task 19's weather search: this fetch is
+  // triggered from an event handler (search button/Enter), so a user
+  // submitting a second search before the first resolves could otherwise
+  // let the older response land last and overwrite the newer one.
+  const requestIdRef = useRef(0)
 
   useEffect(() => {
     fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
@@ -34,6 +39,7 @@ function SearchPage() {
 
   const search = async (e) => {
     e?.preventDefault()
+    const requestId = ++requestIdRef.current
     setStatus('loading')
     try {
       const url = category
@@ -41,9 +47,11 @@ function SearchPage() {
         : `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`
       const res = await fetch(url)
       const data = await res.json()
+      if (requestId !== requestIdRef.current) return // a newer search superseded this one
       setMeals(data.meals || [])
       setStatus('success')
     } catch {
+      if (requestId !== requestIdRef.current) return
       setStatus('error')
     }
   }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RotateCw } from 'lucide-react'
 
 /**
@@ -8,7 +8,10 @@ import { RotateCw } from 'lucide-react'
  *
  * Extended: an attempt log with a running success-rate stat, so the
  * loading/error/success cycle is visibly exercised rather than a single
- * one-off request.
+ * one-off request. The fetch is guarded with a `cancelled` flag (same
+ * pattern as hooks/useFetch.js) — without it, rapidly clicking "Retry"
+ * could let an older, slower-resolving attempt overwrite a newer one's
+ * result after the newer one already landed.
  */
 export default function Task12_LoadingErrorStates() {
   const [status, setStatus] = useState('loading')
@@ -16,8 +19,10 @@ export default function Task12_LoadingErrorStates() {
   const [attempt, setAttempt] = useState(0)
   const [log, setLog] = useState([])
 
-  const load = useCallback(() => {
+  useEffect(() => {
+    let cancelled = false
     setStatus('loading')
+
     const forceFail = Math.random() < 0.4
     const id = forceFail ? 999999 : Math.ceil(Math.random() * 200)
 
@@ -27,19 +32,21 @@ export default function Task12_LoadingErrorStates() {
         return res.json()
       })
       .then((data) => {
+        if (cancelled) return
         setTodo(data)
         setStatus('success')
         setLog((l) => [{ ok: true, t: Date.now() }, ...l].slice(0, 8))
       })
       .catch(() => {
+        if (cancelled) return
         setStatus('error')
         setLog((l) => [{ ok: false, t: Date.now() }, ...l].slice(0, 8))
       })
-  }, [])
 
-  useEffect(() => {
-    load()
-  }, [load, attempt])
+    return () => {
+      cancelled = true
+    }
+  }, [attempt])
 
   const successRate = log.length ? Math.round((log.filter((l) => l.ok).length / log.length) * 100) : null
 
