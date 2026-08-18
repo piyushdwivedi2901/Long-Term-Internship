@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Gauge, Zap } from 'lucide-react'
 
 /**
@@ -35,17 +35,28 @@ export default function Task26_Performance() {
   const [selectedId, setSelectedId] = useState(null)
   const renderCounts = useRef({})
   const [lastMemoTime, setLastMemoTime] = useState(null)
-  const [lastNaiveTime, setLastNaiveTime] = useState(null)
 
-  // useMemo — only recompute when items.length changes, not on every tick
-  const expensiveValue = useMemo(() => {
+  // useMemo — only recompute when items.length changes, not on every tick.
+  // The callback itself is pure: it computes and returns a value, it
+  // never calls setState. Timing the computation is bundled into the
+  // same memoized result rather than measured a second time.
+  const { value: expensiveValue, time: memoTime } = useMemo(() => {
     const start = performance.now()
-    const result = heavyCompute(items.length)
-    setLastMemoTime(Math.round(performance.now() - start))
-    return result
+    const value = heavyCompute(items.length)
+    return { value, time: Math.round(performance.now() - start) }
   }, [items.length])
 
-  // Deliberately naive comparison: recomputes on every render, no memo
+  // Side effects (like pushing a measured value into state for display)
+  // belong in useEffect, not inside useMemo — this only fires once per
+  // real recompute, not once per render or per StrictMode double-invoke.
+  useEffect(() => {
+    setLastMemoTime(memoTime)
+  }, [memoTime])
+
+  // Deliberately naive comparison: recomputes on every render, no memo.
+  // This one is intentionally left inline (not in state) — it's the
+  // "cost paid on every render" being demonstrated, not a value the UI
+  // needs to persist.
   const naiveStart = performance.now()
   heavyCompute(items.length)
   const naiveElapsed = Math.round(performance.now() - naiveStart)

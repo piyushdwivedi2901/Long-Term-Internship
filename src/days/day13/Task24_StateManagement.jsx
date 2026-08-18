@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Trash2 } from 'lucide-react'
 import { useTodoStore } from '../../store/todoStore.js'
 
@@ -9,6 +9,11 @@ import { useTodoStore } from '../../store/todoStore.js'
  * lives in a store outside the component, and any component can
  * subscribe to it. Extended so the filter lives in the store too,
  * not just the todos, and a stats row reads directly from the store.
+ *
+ * The visible (filtered) list is derived here with useMemo from the
+ * selected `todos`/`filter`, rather than via a getter function stored on
+ * the store itself — the conventional Zustand shape keeps the store to
+ * data + actions and leaves derived/view state to the component.
  */
 export default function Task24_StateManagement() {
   const todos = useTodoStore((state) => state.todos)
@@ -17,7 +22,6 @@ export default function Task24_StateManagement() {
   const toggleTodo = useTodoStore((state) => state.toggleTodo)
   const removeTodo = useTodoStore((state) => state.removeTodo)
   const setFilter = useTodoStore((state) => state.setFilter)
-  const visibleTodos = useTodoStore((state) => state.visibleTodos)
   const [input, setInput] = useState('')
 
   const handleAdd = (e) => {
@@ -27,7 +31,11 @@ export default function Task24_StateManagement() {
     setInput('')
   }
 
-  const visible = visibleTodos()
+  const visible = useMemo(() => {
+    if (filter === 'active') return todos.filter((t) => !t.done)
+    if (filter === 'done') return todos.filter((t) => t.done)
+    return todos
+  }, [todos, filter])
   const doneCount = todos.filter((t) => t.done).length
 
   return (

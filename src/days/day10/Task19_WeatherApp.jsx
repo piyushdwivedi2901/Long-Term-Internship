@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Wind, Droplets, MapPin, Search } from 'lucide-react'
 
 /**
@@ -32,9 +32,16 @@ export default function Task19_WeatherApp() {
   const [errorMsg, setErrorMsg] = useState('')
   const [unit, setUnit] = useState('C')
   const [recent, setRecent] = useState([])
+  // Tracks which search is the most recent one fired. Search is triggered
+  // from event handlers (not an effect responding to a dependency), so
+  // this plays the same role useFetch's `cancelled` flag plays there:
+  // if a newer search has started by the time an older one resolves,
+  // the older response is discarded instead of overwriting fresher data.
+  const requestIdRef = useRef(0)
 
   const runSearch = async (query) => {
     if (!query.trim()) return
+    const requestId = ++requestIdRef.current
     setStatus('loading')
     setErrorMsg('')
 
@@ -44,6 +51,7 @@ export default function Task19_WeatherApp() {
       )
       const geoData = await geoRes.json()
       const place = geoData?.results?.[0]
+      if (requestId !== requestIdRef.current) return // a newer search superseded this one
       if (!place) {
         setStatus('error')
         setErrorMsg(`No location found for "${query}".`)
@@ -54,6 +62,7 @@ export default function Task19_WeatherApp() {
         `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto&forecast_days=4`
       )
       const weatherData = await weatherRes.json()
+      if (requestId !== requestIdRef.current) return // a newer search superseded this one
 
       setWeather({
         place: `${place.name}, ${place.country}`,
@@ -70,6 +79,7 @@ export default function Task19_WeatherApp() {
       setStatus('success')
       setRecent((r) => [query, ...r.filter((c) => c.toLowerCase() !== query.toLowerCase())].slice(0, 5))
     } catch {
+      if (requestId !== requestIdRef.current) return // a newer search superseded this one
       setStatus('error')
       setErrorMsg('Something went wrong fetching weather data.')
     }

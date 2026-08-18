@@ -5,10 +5,16 @@ import { create } from 'zustand'
  * and actions live outside the component tree. The filter also lives
  * here (not in component state) to show the store owning UI state too,
  * not just data.
+ *
+ * Deliberately does NOT store a `visibleTodos` getter function as state —
+ * an earlier version did, which technically worked (it reads fresh state
+ * via `get()`) but isn't the conventional shape for a Zustand store.
+ * Components select the raw `todos`/`filter` and derive the visible list
+ * themselves with `useMemo`, the same pattern used elsewhere in this repo.
  */
 let nextId = 3
 
-export const useTodoStore = create((set, get) => ({
+export const useTodoStore = create((set) => ({
   todos: [
     { id: 1, text: 'Learn Zustand basics', done: true },
     { id: 2, text: 'Rebuild the to-do app with it', done: false },
@@ -28,13 +34,4 @@ export const useTodoStore = create((set, get) => ({
       todos: state.todos.filter((t) => t.id !== id),
     })),
   setFilter: (filter) => set({ filter }),
-
-  // A selector-style getter — components can call this instead of
-  // deriving the same filtered list themselves.
-  visibleTodos: () => {
-    const { todos, filter } = get()
-    if (filter === 'active') return todos.filter((t) => !t.done)
-    if (filter === 'done') return todos.filter((t) => t.done)
-    return todos
-  },
 }))
