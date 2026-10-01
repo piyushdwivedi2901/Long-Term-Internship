@@ -33,6 +33,7 @@ import Task31_CompoundComponents from './days/day16/Task31_CompoundComponents'
 import Task32_Portals from './days/day17/Task32_Portals'
 import Task33_AccessibilityPass from './days/day17/Task33_AccessibilityPass'
 import Task34_Animation from './days/day18/Task34_Animation'
+import Task35_RealBackend from './days/day19/Task35_RealBackend'
 
 export interface TaskEntry {
   id: string
@@ -122,6 +123,9 @@ export const taskRegistry: DayEntry[] = [
   ]},
   { day: 18, label: 'Day 18', tasks: [
     { id: 'd18-t34', num: 34, title: 'Animation', Component: Task34_Animation },
+  ]},
+  { day: 19, label: 'Day 19', tasks: [
+    { id: 'd19-t35', num: 35, title: 'Real Backend', Component: Task35_RealBackend },
   ]},
 ]
 

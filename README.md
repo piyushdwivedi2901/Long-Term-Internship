@@ -90,6 +90,7 @@ npm test         # run the test suite (Task 25)
 - [x] Day 17 — Task 32: Portals (accessible `Modal`, view-cart flow)
 - [x] Day 17 — Task 33: Accessibility pass (axe audit, keyboard Kanban, contrast) — see [`docs/accessibility-audit.md`](docs/accessibility-audit.md)
 - [x] Day 18 — Task 34: Animation (framer-motion: list add/remove, drag feedback, route transitions)
+- [x] Day 19 — Task 35: Real backend (Express + SQLite persistence, demo-mode fallback)
 
 ## Source
 
