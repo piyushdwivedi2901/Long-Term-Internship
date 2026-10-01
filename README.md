@@ -7,9 +7,9 @@ real, working apps.
 **🔗 Live demo:** https://piyushdwivedi2901.github.io/Long-Term-Internship/
 
 Every task lives under `src/days/dayXX/` and is wired into the sidebar nav in
-`src/App.jsx`, so the whole history stays browsable in one running app —
+`src/registry.ts`, so the whole history stays browsable in one running app —
 open the live demo (or run it locally) and click through the sidebar to see
-all 26 tasks live.
+every task live.
 
 ## Running it locally
 
@@ -81,7 +81,14 @@ npm test         # run the test suite (Task 25)
 - [x] Day 13 — Task 25: Testing (Vitest + React Testing Library, 29 passing tests)
 - [x] Day 13 — Task 26: Performance (`useMemo`, `useCallback`, `React.memo`)
 
-**All 26 tasks complete.** 🎉
+### Week 6: Advanced Patterns & Real-World Concerns
+- [x] Day 14 — Task 27: TypeScript basics (`ProfileCard.tsx`, generic `useFetch<T>`)
+- [x] Day 14 — Task 28: Typed Zustand store
+- [x] Day 15 — Task 29: Error boundaries
+- [x] Day 15 — Task 30: Code splitting (`React.lazy` + `Suspense`)
+- [x] Day 16 — Task 31: Compound components (`DayNav`)
+- [x] Day 17 — Task 32: Portals (accessible `Modal`, view-cart flow)
+- [x] Day 17 — Task 33: Accessibility pass (axe audit, keyboard Kanban, contrast) — see [`docs/accessibility-audit.md`](docs/accessibility-audit.md)
 
 ## Source
 

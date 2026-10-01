@@ -63,7 +63,7 @@ export default function Task29_ErrorBoundaries() {
 
       <div className="split-layout" style={{ gap: 16 }}>
         <section className="card" style={{ minWidth: 220 }} aria-label="Clock widget">
-          <h4><Clock size={14} className="icon-inline" />Clock</h4>
+          <h3><Clock size={14} className="icon-inline" />Clock</h3>
           <ErrorBoundary name="Clock" onError={report('Clock')}>
             <ClockWidget />
           </ErrorBoundary>
@@ -71,14 +71,14 @@ export default function Task29_ErrorBoundaries() {
         </section>
 
         <section className="card" style={{ minWidth: 240 }} aria-label="Fragile counter widget">
-          <h4><Bomb size={14} className="icon-inline" />Fragile counter</h4>
+          <h3><Bomb size={14} className="icon-inline" />Fragile counter</h3>
           <ErrorBoundary name="Counter" onError={report('Counter')}>
             <FragileCounter limit={2} />
           </ErrorBoundary>
         </section>
 
         <section className="card" style={{ minWidth: 260 }} aria-label="JSON preview widget">
-          <h4><FileJson size={14} className="icon-inline" />JSON preview</h4>
+          <h3><FileJson size={14} className="icon-inline" />JSON preview</h3>
           <label htmlFor="t29-json" className="hint">Edit to something invalid, e.g. <code>{'{ oops'}</code></label>
           <textarea
             id="t29-json"

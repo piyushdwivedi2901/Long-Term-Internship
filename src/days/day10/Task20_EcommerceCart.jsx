@@ -90,7 +90,7 @@ export default function Task20_EcommerceCart() {
       <p className="task-goal">Add items, adjust quantity inline, apply a coupon, and watch subtotal → discount → tax → total recompute — all derived from one cart array.</p>
       <div className="split-layout">
         <div>
-          <h4><ShoppingBag size={15} className="icon-inline" />Catalog</h4>
+          <h3><ShoppingBag size={15} className="icon-inline" aria-hidden="true" />Catalog</h3>
           <ul className="product-list">
             {catalog.map((p) => (
               <li key={p.id}>
@@ -101,7 +101,7 @@ export default function Task20_EcommerceCart() {
           </ul>
         </div>
         <div>
-          <h4>Cart</h4>
+          <h3>Cart</h3>
           {cartWithDetails.length === 0 && <p className="empty-state">Cart is empty.</p>}
           {cartWithDetails.length > 0 && (
             <>
@@ -113,6 +113,7 @@ export default function Task20_EcommerceCart() {
                       type="number"
                       min={0}
                       value={item.qty}
+                      aria-label={`Quantity for ${item.product.name}`}
                       onChange={(e) => updateQty(item.id, Number(e.target.value))}
                       className="qty-input"
                     />
@@ -129,15 +130,16 @@ export default function Task20_EcommerceCart() {
                   className="search-input"
                   style={{ maxWidth: 160 }}
                   placeholder="Coupon code"
+                  aria-label="Coupon code"
                   value={couponInput}
                   onChange={(e) => setCouponInput(e.target.value)}
                 />
                 <button type="submit"><Tag size={13} className="icon-inline" />Apply</button>
               </form>
-              {couponError && <p className="field-error">{couponError}</p>}
-              {appliedCoupon && <p className="success-text" style={{ fontSize: '0.82rem' }}>{appliedCoupon} applied — {discountRate * 100}% off</p>}
+              {couponError && <p className="field-error" role="alert">{couponError}</p>}
+              {appliedCoupon && <p className="success-text" role="status" style={{ fontSize: '0.82rem' }}>{appliedCoupon} applied — {discountRate * 100}% off</p>}
 
-              <div className="cart-summary" style={{ maxWidth: 260, marginTop: 12 }}>
+              <div className="cart-summary" role="status" aria-live="polite" aria-label="Order summary" style={{ maxWidth: 260, marginTop: 12 }}>
                 <p style={{ display: 'flex', justifyContent: 'space-between' }}><span>Subtotal</span><span>₹{subtotal}</span></p>
                 {discount > 0 && (
                   <p style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--done)' }}><span>Discount</span><span>−₹{discount}</span></p>

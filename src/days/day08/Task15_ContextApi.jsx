@@ -42,10 +42,10 @@ function Header() {
   const { theme, themeKey } = useTheme()
   const Icon = theme.icon
   return (
-    <h4 style={{ display: 'flex', alignItems: 'center', gap: 6, color: theme.fg }}>
+    <h3 style={{ display: 'flex', alignItems: 'center', gap: 6, color: theme.fg }}>
       <Icon size={15} /> {theme.label} theme active
       <span className="hint">(key: {themeKey})</span>
-    </h4>
+    </h3>
   )
 }
 

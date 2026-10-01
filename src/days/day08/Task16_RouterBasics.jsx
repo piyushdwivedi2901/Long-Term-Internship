@@ -12,7 +12,7 @@ import { Home as HomeIcon, Info, Mail } from 'lucide-react'
 function Home() {
   return (
     <div>
-      <h4><HomeIcon size={15} className="icon-inline" />Home</h4>
+      <h3><HomeIcon size={15} className="icon-inline" />Home</h3>
       <p>Welcome to the home page of this mini multi-page demo.</p>
     </div>
   )
@@ -20,7 +20,7 @@ function Home() {
 function About() {
   return (
     <div>
-      <h4><Info size={15} className="icon-inline" />About</h4>
+      <h3><Info size={15} className="icon-inline" />About</h3>
       <p>This is a small app built to practice React Router basics — client-side navigation with no full page reloads.</p>
     </div>
   )
@@ -28,7 +28,7 @@ function About() {
 function Contact() {
   return (
     <div>
-      <h4><Mail size={15} className="icon-inline" />Contact</h4>
+      <h3><Mail size={15} className="icon-inline" />Contact</h3>
       <p>Reach out at hello@example.com.</p>
     </div>
   )

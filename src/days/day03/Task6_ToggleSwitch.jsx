@@ -12,9 +12,10 @@ import { Eye, EyeOff, Moon, Sun, Bell, Volume2, VolumeX } from 'lucide-react'
 function Switch({ checked, onChange, label, id }) {
   return (
     <label htmlFor={id} className="field-row" style={{ cursor: 'pointer', justifyContent: 'space-between', maxWidth: 300 }}>
-      <span>{label}</span>
+      <span id={`${id}-label`}>{label}</span>
       <span
         role="switch"
+        aria-labelledby={`${id}-label`}
         aria-checked={checked}
         id={id}
         tabIndex={0}

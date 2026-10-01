@@ -67,7 +67,7 @@ function SearchPage() {
           <Search size={14} style={{ position: 'absolute', left: 10, top: 10, color: 'var(--text-faint)' }} />
           <input style={{ paddingLeft: 30, width: '100%' }} value={query} onChange={(e) => { setQuery(e.target.value); setCategory('') }} placeholder="Search a recipe…" />
         </div>
-        <select className="select-input" value={category} onChange={(e) => { setCategory(e.target.value); }}>
+        <select className="select-input" aria-label="Filter by category" value={category} onChange={(e) => { setCategory(e.target.value); }}>
           <option value="">All categories</option>
           {categories.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>

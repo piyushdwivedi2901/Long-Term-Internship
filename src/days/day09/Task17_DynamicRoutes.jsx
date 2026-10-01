@@ -21,7 +21,7 @@ function ProductListPage() {
   const categories = [...new Set(products.map((p) => p.category))]
   return (
     <div>
-      <h4>Products</h4>
+      <h3>Products</h3>
       {categories.map((cat) => (
         <div key={cat} style={{ marginBottom: 14 }}>
           <p className="pill" style={{ marginBottom: 6 }}><Tag size={11} />{cat}</p>
@@ -58,7 +58,7 @@ function ProductDetailPage() {
   return (
     <div>
       <button onClick={() => navigate('/')}><ArrowLeft size={13} className="icon-inline" />Back to list</button>
-      <h4 style={{ marginTop: 12 }}>{product.name}</h4>
+      <h3 style={{ marginTop: 12 }}>{product.name}</h3>
       <p className="pill" style={{ marginBottom: 8 }}><Tag size={11} />{product.category}</p>
       <p className="cart-total" style={{ margin: '4px 0' }}>₹{product.price}</p>
       <p>{product.desc}</p>

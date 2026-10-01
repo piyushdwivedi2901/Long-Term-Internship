@@ -83,7 +83,7 @@ export default function Task8_TodoList() {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Add a task..."
         />
-        <select className="select-input" value={priority} onChange={(e) => setPriority(e.target.value)}>
+        <select className="select-input" aria-label="Priority" value={priority} onChange={(e) => setPriority(e.target.value)}>
           {PRIORITIES.map((p) => <option key={p} value={p}>{p}</option>)}
         </select>
         <button className="primary" type="submit">Add</button>

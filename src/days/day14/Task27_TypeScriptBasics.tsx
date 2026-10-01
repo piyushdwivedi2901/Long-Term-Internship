@@ -73,7 +73,7 @@ export default function Task27_TypeScriptBasics() {
         </div>
       </div>
 
-      <h4>1 · Typed props — <code>ProfileCardProps</code></h4>
+      <h3>1 · Typed props — <code>ProfileCardProps</code></h3>
       <div className="card-grid" style={{ marginBottom: 20 }}>
         {people.map((p) => (
           <ProfileCard key={p.name} {...p} />
@@ -87,7 +87,7 @@ export default function Task27_TypeScriptBasics() {
   year: number
 }`}</pre>
 
-      <h4>2 · Generic hook — <code>useFetch&lt;User[]&gt;</code></h4>
+      <h3>2 · Generic hook — <code>useFetch&lt;User[]&gt;</code></h3>
       <div className="toolbar">
         <div className="tab-group" role="group" aria-label="Sort users by">
           {(['name', 'email'] as const).map((key) => (
@@ -121,7 +121,7 @@ export default function Task27_TypeScriptBasics() {
   error: Error | null
 }`}</pre>
 
-      <h4><Braces size={14} className="icon-inline" />3 · What the compiler rejects</h4>
+      <h3><Braces size={14} className="icon-inline" />3 · What the compiler rejects</h3>
       <p className="hint">These lines live in <code>Task27_TypeChecks.ts</code> as <code>@ts-expect-error</code> directives — if the types were loosened, CI would fail.</p>
       <pre className="code-block">{`const a: ProfileCardProps = { ...valid, year: `}<span className="tok-err">{`'1843'`}</span>{` }   `}<span className="tok-dim">{`// string is not number`}</span>{`
 const b: ProfileCardProps = { name, bio, image, year }  `}<span className="tok-dim">{`// 'field' missing`}</span>{`

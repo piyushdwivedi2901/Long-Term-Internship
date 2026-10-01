@@ -81,7 +81,7 @@ export default function Task28_TypedStore() {
       <div className="split-layout" style={{ gap: 24 }}>
         <div>
           <p className="task-eyebrow">Live state ({visible.length} visible)</p>
-          <pre className="code-block" style={{ maxWidth: 320 }}>{JSON.stringify({ filter, todos }, null, 2)}</pre>
+          <pre className="code-block" tabIndex={0} aria-label="Store state (scrollable)" style={{ maxWidth: 320 }}>{JSON.stringify({ filter, todos }, null, 2)}</pre>
         </div>
         <div>
           <p className="task-eyebrow"><Activity size={12} className="icon-inline" />Transition log (via subscribe)</p>
