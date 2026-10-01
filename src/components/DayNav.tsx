@@ -92,9 +92,11 @@ interface ItemProps {
   id: string
   num: number
   title: string
+  /** Fired on hover / keyboard focus — lets the app warm the target's code. */
+  onPrefetch?: () => void
 }
 
-function Item({ id, num, title }: ItemProps) {
+function Item({ id, num, title, onPrefetch }: ItemProps) {
   const { value, onValueChange } = useDayNav('DayNav.Item')
   const selected = value === id
   return (
@@ -105,6 +107,8 @@ function Item({ id, num, title }: ItemProps) {
         className={`task-nav-btn ${selected ? 'active' : ''}`}
         aria-current={selected ? 'page' : undefined}
         onClick={() => onValueChange(id)}
+        onPointerEnter={onPrefetch}
+        onFocus={onPrefetch}
       >
         {String(num).padStart(2, '0')} · {title}
       </button>

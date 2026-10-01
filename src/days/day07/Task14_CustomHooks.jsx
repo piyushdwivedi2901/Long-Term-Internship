@@ -1,4 +1,6 @@
+import { QueryClientProvider } from '@tanstack/react-query'
 import { useJson } from '../../hooks/useJson'
+import { queryClient } from '../../lib/queryClient'
 import { useLocalStorage } from '../../hooks/useLocalStorage.js'
 import { useDebounce } from '../../hooks/useDebounce.js'
 import { Save, Disc, Search } from 'lucide-react'
@@ -14,7 +16,17 @@ import { useMemo, useState } from 'react'
  * URL (so the request only fires once typing pauses), and the last
  * search term is preserved with useLocalStorage across reloads.
  */
+// The query client is provided here (not in main.jsx) so TanStack Query's ~48 kB
+// lives in an on-demand chunk instead of every visitor's first load (Task 41).
 export default function Task14_CustomHooks() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <CustomHooksDemo />
+    </QueryClientProvider>
+  )
+}
+
+function CustomHooksDemo() {
   const [savedTerm, setSavedTerm] = useLocalStorage('task14-search-term', 'love')
   const [term, setTerm] = useState(savedTerm)
   const debouncedTerm = useDebounce(term, 500)

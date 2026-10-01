@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { DayNav } from './components/DayNav'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { ROADMAP_TOTAL, allTasks, findTask, taskRegistry } from './registry'
 
 const hashToId = () => window.location.hash.replace(/^#\//, '')
@@ -57,7 +58,7 @@ export default function App() {
           {taskRegistry.map((day) => (
             <DayNav.Day key={day.day} label={day.label} active={day.day === activeDay.day}>
               {day.tasks.map((t) => (
-                <DayNav.Item key={t.id} id={t.id} num={t.num} title={t.title} />
+                <DayNav.Item key={t.id} id={t.id} num={t.num} title={t.title} onPrefetch={t.preload} />
               ))}
             </DayNav.Day>
           ))}
@@ -72,8 +73,14 @@ export default function App() {
             Task {String(active.num).padStart(2, '0')} · {active.title}
           </span>
         </div>
-        <main className="content">
-          <ActiveComponent />
+        <main className="content" id="main">
+          {/* Each task is a separate chunk: show a skeleton while it loads, and a
+              recoverable error (e.g. offline / stale deploy) if the chunk fails. */}
+          <ErrorBoundary name={`Task ${active.num}`} resetKeys={[active.id]}>
+            <Suspense fallback={<p className="empty-state" role="status">Loading task…</p>}>
+              <ActiveComponent />
+            </Suspense>
+          </ErrorBoundary>
         </main>
       </div>
     </div>

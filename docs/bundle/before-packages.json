@@ -1,0 +1,21 @@
+{
+ "assets/index-CLsA-Dl_.js": {
+  "(app code)": 248839,
+  "motion-dom": 209495,
+  "react-dom": 184645,
+  "zod": 146373,
+  "react-router": 91132,
+  "framer-motion": 87972,
+  "react-hook-form": 76103,
+  "@tanstack/query-core": 61499
+ },
+ "assets/Task30_HeavyReport-DXypHKLL.js": {
+  "(app code)": 2253
+ },
+ "assets/axe-njI-0DYJ.js": {
+  "axe-core": 1270958
+ },
+ "assets/rolldown-runtime-CbXtAM7H.js": {
+  "(app code)": 1162
+ }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "index.js",
+    "bytes": 606741,
+    "gzip": 187697
+  },
+  {
+    "name": "axe.js",
+    "bytes": 586908,
+    "gzip": 159099
+  },
+  {
+    "name": "Task30_HeavyReport.js",
+    "bytes": 1290,
+    "gzip": 677
+  },
+  {
+    "name": "rolldown-runtime.js",
+    "bytes": 589,
+    "gzip": 368
+  }
+]

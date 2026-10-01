@@ -28,7 +28,7 @@
   --danger-soft: rgba(226, 112, 138, 0.14);
 
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -1093,3 +1093,13 @@ kbd {
 .field input { width: 100%; }
 .router-nav button { font-size: 0.82rem; }
 .t37-panel { min-height: 56px; margin: 10px 0; }
+
+/* Bundle analysis (Task 41) */
+.bundle-bars { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.bundle-bars li { display: grid; grid-template-columns: 150px 1fr auto; align-items: center; gap: 10px; font-size: 0.78rem; }
+.bundle-name { font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bundle-track { height: 10px; background: var(--surface); border-radius: 999px; overflow: hidden; }
+.bundle-fill { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.bundle-size { font-family: var(--font-mono); color: var(--text-muted); }
+.e2e-suite { margin: 0 0 20px; }
+.e2e-suite h4 { margin-bottom: 4px; }

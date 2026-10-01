@@ -12,9 +12,13 @@
     "audit:a11y": "node scripts/axe-audit.mjs",
     "server": "node server/index.js",
     "dev:full": "node scripts/dev-full.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "analyze": "ANALYZE=1 vite build",
+    "lighthouse": "node scripts/lighthouse.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
     "@hookform/resolvers": "^5.9.1",
     "@tanstack/react-query": "^5.104.0",
     "express": "^5.2.1",
@@ -39,6 +43,8 @@
     "@vitejs/plugin-react": "^6.1.1",
     "axe-core": "^4.13.0",
     "jsdom": "^30.1.1",
+    "lighthouse": "^13.5.0",
+    "rollup-plugin-visualizer": "^7.1.1",
     "supertest": "^7.3.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.1",

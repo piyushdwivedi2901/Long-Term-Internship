@@ -9,9 +9,10 @@ beforeEach(() => {
 })
 
 describe('App shell', () => {
-  it('opens task 1 by default', () => {
+  it('opens task 1 by default and lazy-loads its content', async () => {
     render(<App />)
     expect(screen.getByRole('button', { name: /^01 · / })).toHaveAttribute('aria-current', 'page')
+    expect(await screen.findByRole('heading', { level: 2 })).toBeInTheDocument()
   })
 
   it('reports progress from the registry', () => {
@@ -26,6 +27,14 @@ describe('App shell', () => {
     await userEvent.click(screen.getByRole('button', { name: /^08 · / }))
     expect(window.location.hash).toBe('#/d4-t8')
     expect(screen.getByRole('button', { name: /^08 · / })).toHaveAttribute('aria-current', 'page')
+    expect(await screen.findByRole('heading', { name: 'To-Do List' })).toBeInTheDocument()
+  })
+
+  it('shows a loading state while a task chunk loads', async () => {
+    render(<App />)
+    await userEvent.click(screen.getByRole('button', { name: /^12 · / }))
+    expect(screen.getByText('Loading task…')).toBeInTheDocument()
+    await screen.findByRole('heading', { level: 2 })
   })
 
   it('honours a deep link on load', () => {

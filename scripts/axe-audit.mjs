@@ -27,7 +27,10 @@ let failures = 0
 
 for (const id of ids) {
   await page.goto(`${BASE}#/${id}`)
-  await page.waitForSelector('main')
+  // Tasks are lazy-loaded: wait for the page's <h2>, then for entrance animations
+  // to settle (axe would otherwise measure mid-fade colours).
+  await page.waitForSelector('main h2')
+  await page.waitForFunction(() => document.getAnimations().every((a) => a.playState === 'finished'))
   await page.evaluate(axeSource)
   const { violations } = await page.evaluate(() => globalThis.axe.run(document.querySelector('main')))
   console.log(`${violations.length === 0 ? '✓' : '✗'} ${id}`)

@@ -1,0 +1,242 @@
+{
+  "lighthouse": {
+    "before": {
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 2208,
+        "lcp": 2208,
+        "tbt": 8,
+        "cls": 0,
+        "speedIndex": 4131
+      },
+      "unusedJsKiB": 140,
+      "totalTransferKiB": 191
+    },
+    "after": {
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 1615,
+        "lcp": 1717,
+        "tbt": 0,
+        "cls": 0.012,
+        "speedIndex": 1615
+      },
+      "unusedJsKiB": 0,
+      "totalTransferKiB": 155
+    }
+  },
+  "bundle": {
+    "before": {
+      "chunkCount": 4,
+      "totalBytes": 1195528,
+      "totalGzip": 347841,
+      "top": [
+        {
+          "name": "index.js",
+          "bytes": 606741,
+          "gzip": 187697,
+          "topPackages": [
+            [
+              "(app code)",
+              248839
+            ],
+            [
+              "motion-dom",
+              209495
+            ],
+            [
+              "react-dom",
+              184645
+            ],
+            [
+              "zod",
+              146373
+            ]
+          ]
+        },
+        {
+          "name": "axe.js",
+          "bytes": 586908,
+          "gzip": 159099,
+          "topPackages": [
+            [
+              "axe-core",
+              1270958
+            ]
+          ]
+        },
+        {
+          "name": "Task30_HeavyReport.js",
+          "bytes": 1290,
+          "gzip": 677,
+          "topPackages": [
+            [
+              "(app code)",
+              2253
+            ]
+          ]
+        },
+        {
+          "name": "rolldown-runtime.js",
+          "bytes": 589,
+          "gzip": 368,
+          "topPackages": [
+            [
+              "(app code)",
+              1162
+            ]
+          ]
+        }
+      ]
+    },
+    "after": {
+      "chunkCount": 81,
+      "totalBytes": 1241364,
+      "totalGzip": 390674,
+      "top": [
+        {
+          "name": "axe.js",
+          "bytes": 586949,
+          "gzip": 159137,
+          "topPackages": [
+            [
+              "axe-core",
+              1270919
+            ]
+          ]
+        },
+        {
+          "name": "index.js",
+          "bytes": 149052,
+          "gzip": 48916,
+          "topPackages": [
+            [
+              "react-dom",
+              184528
+            ],
+            [
+              "(app code)",
+              20094
+            ],
+            [
+              "scheduler",
+              5888
+            ],
+            [
+              "lucide-react",
+              615
+            ]
+          ]
+        },
+        {
+          "name": "Task34_Animation.js",
+          "bytes": 138007,
+          "gzip": 45135,
+          "topPackages": [
+            [
+              "motion-dom",
+              202421
+            ],
+            [
+              "framer-motion",
+              85248
+            ],
+            [
+              "(app code)",
+              7651
+            ],
+            [
+              "motion-utils",
+              6665
+            ]
+          ]
+        },
+        {
+          "name": "Task38_FormsAtScale.js",
+          "bytes": 117046,
+          "gzip": 35714,
+          "topPackages": [
+            [
+              "zod",
+              145671
+            ],
+            [
+              "react-hook-form",
+              76128
+            ],
+            [
+              "(app code)",
+              7682
+            ],
+            [
+              "@hookform/resolvers",
+              4694
+            ]
+          ]
+        },
+        {
+          "name": "chunk-OB3PAWPO.js",
+          "bytes": 37360,
+          "gzip": 13292,
+          "topPackages": [
+            [
+              "react-router",
+              91065
+            ]
+          ]
+        },
+        {
+          "name": "useQuery.js",
+          "bytes": 32750,
+          "gzip": 9702,
+          "topPackages": [
+            [
+              "@tanstack/query-core",
+              60831
+            ],
+            [
+              "@tanstack/react-query",
+              5337
+            ]
+          ]
+        },
+        {
+          "name": "jsx-runtime.js",
+          "bytes": 7164,
+          "gzip": 2766,
+          "topPackages": [
+            [
+              "react",
+              10135
+            ]
+          ]
+        },
+        {
+          "name": "Task35_RealBackend.js",
+          "bytes": 6626,
+          "gzip": 2843,
+          "topPackages": [
+            [
+              "(app code)",
+              11011
+            ],
+            [
+              "lucide-react",
+              828
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

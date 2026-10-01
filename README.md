@@ -1,47 +1,86 @@
 # Long Term Internship — React Practice
 
-A running log of a 5-week React learning roadmap: components, hooks, side
-effects, routing, and mini projects — building toward a small portfolio of
-real, working apps.
+A running log of a 41-task React roadmap — components, hooks, routing, state, TypeScript,
+accessibility, a real backend with auth, testing and production performance — built as one
+browsable portfolio app.
 
 **🔗 Live demo:** https://piyushdwivedi2901.github.io/Long-Term-Internship/
 
-Every task lives under `src/days/dayXX/` and is wired into the sidebar nav in
-`src/registry.ts`, so the whole history stays browsable in one running app —
-open the live demo (or run it locally) and click through the sidebar to see
-every task live.
+Every task lives under `src/days/dayNN/` and is registered in `src/registry.ts`, which drives the
+sidebar (a literal commit graph, one node per day), breadcrumbs, `#/d17-t32`-style deep links and the
+progress bar. Each task is its own lazily-loaded chunk.
 
 ## Running it locally
 
 ```bash
 npm install
-npm run dev      # start the app
-npm run build    # production build
-npm test         # run the test suite (Task 25)
+npm run dev          # frontend only — uses the in-browser demo backend
+npm run dev:full     # frontend + the real Express/SQLite API together
+npm run server       # API only (http://localhost:3001)
 ```
+
+Requires **Node 22+** (the API uses the built-in `node:sqlite`).
+
+| Script | What it does |
+|---|---|
+| `npm test` | Vitest + Testing Library unit/component/API tests |
+| `npm run test:e2e` | Playwright end-to-end tests (builds, serves, starts the API) |
+| `npm run typecheck` | `tsc --noEmit` (strict; JS and TS coexist) |
+| `npm run build` / `preview` | Production build / serve it |
+| `npm run analyze` | Build + interactive bundle treemap in `stats/` |
+| `npm run audit:a11y` | axe-core on every task page in real Chromium (needs `preview` running) |
+| `npm run lighthouse -- <url> <out.json>` | Lighthouse report |
+
+## Backend: real server vs. demo mode
+
+GitHub Pages can only host static files, so the deployed site runs the same API interface against
+**browser storage ("demo mode")** — clearly labelled in the UI. Locally, set `VITE_API_URL`
+(`npm run dev:full` does it for you) and the app talks to the real server in `server/`:
+
+- Express + SQLite (`node:sqlite`), validated CRUD, parameterised queries
+- Email/password auth: scrypt-hashed passwords, signed JWTs, per-user data isolation
+- `JWT_SECRET` is required when `NODE_ENV=production`; `DB_FILE` and `CORS_ORIGIN` are configurable
+
+To host the API for real, deploy `server/` to any Node 22 host (Render, Railway, Fly…), set those
+variables, and build the frontend with `VITE_API_URL=https://your-api`.
+
+## Project layout
+
+```
+src/
+  days/dayNN/       one folder per day's tasks (+ co-located tests)
+  components/       shared: DayNav (compound), Modal (portal), ErrorBoundary, ProfileCard
+  api/              HTTP + demo clients behind one interface
+  auth/             AuthProvider, ProtectedRoute
+  hooks/ store/     useFetch<T>, useJson (TanStack Query), typed Zustand store
+  registry.ts       the task registry (lazy-loaded)
+server/             Express + SQLite API and its tests
+e2e/                Playwright specs
+docs/               accessibility, Lighthouse and bundle write-ups + raw reports
+scripts/            audit / report tooling
+```
+
+## Quality gates
+
+Every push to `main` runs, in order: **typecheck → unit tests → Playwright E2E → build → deploy**
+(`.github/workflows/deploy.yml`). A failure at any step blocks the deploy.
+
+- **162 Vitest tests** across 31 files (components, hooks, store, API client, Express server) — including
+  automated axe-core accessibility checks.
+- **12 Playwright tests**: todo flow, cart/checkout, navigation, and the real API.
+- **0 axe violations** on all 41 pages in a real browser (colour contrast included) —
+  [`docs/accessibility-audit.md`](docs/accessibility-audit.md).
+- **Lighthouse** performance 94 → 99 — [`docs/lighthouse-audit.md`](docs/lighthouse-audit.md).
 
 ## Tech notes
 
-- **Bundler:** Vite + React 18, icon system via `lucide-react`
-- **Design:** an ink-navy/amber "git commit log" aesthetic — the sidebar is
-  a literal commit graph, one node per day — with IBM Plex Mono for
-  structural elements and Inter for body copy.
-- **Routing tasks (16, 17, 22):** use `react-router-dom`'s `MemoryRouter`
-  since these mini-apps are embedded inside the outer sidebar shell —
-  swap in `BrowserRouter` if extracting one as a standalone app.
-- **Live public APIs used (no keys required):** JSONPlaceholder (Tasks
-  10–12, joined posts+authors), Open-Meteo (Task 19 — current weather +
-  3-day forecast), Open Trivia DB (Task 21 — quiz, category/difficulty
-  aware), TheMealDB (Task 22 — recipe search + category filter + favorites).
-- **State management (Task 24):** Zustand, chosen over Redux Toolkit for
-  minimal boilerplate — the store owns both the todos and the active filter.
-- **Custom hooks (`src/hooks/`):** `useFetch`, `useLocalStorage`,
-  `useDebounce` — built once, reused across Tasks 14, 22, and beyond.
-- **Testing (Task 25):** Vitest + React Testing Library. Test files sit next
-  to the components they cover (`*.test.jsx`) — 29 passing tests across 6 suites.
-- **CI/CD:** every push to `main` runs the full test suite, builds, and
-  deploys to GitHub Pages automatically (`.github/workflows/deploy.yml`) —
-  a failing test blocks the deploy.
+- **Stack:** Vite 8 + React 18, TypeScript (strict, incrementally adopted — JS and TS files coexist),
+  react-router (MemoryRouter for embedded demos), Zustand, TanStack Query, framer-motion,
+  React Hook Form + Zod, lucide-react.
+- **Design:** an ink-navy/amber "git commit log" aesthetic with IBM Plex Mono and Inter (self-hosted).
+- **Public APIs used (no keys):** JSONPlaceholder, Open-Meteo, Open Trivia DB, TheMealDB.
+- **Patterns demonstrated:** race-condition guards, compound components, error boundaries, code splitting,
+  portals with focus management, optimistic updates with rollback, protected routes.
 
 ## Progress
 
@@ -97,7 +136,11 @@ npm test         # run the test suite (Task 25)
 - [x] Day 20 — Task 37: TanStack Query (`useJson`, caching, refetch-on-focus)
 - [x] Day 21 — Task 38: Forms at scale (React Hook Form + Zod vs the manual form, with measurements)
 - [x] Day 21 — Task 39: E2E testing (Playwright: todo, cart/checkout, navigation, real-API suites)
+- [x] Day 22 — Task 40: Performance audit (Lighthouse 94 → 99, [`docs/lighthouse-audit.md`](docs/lighthouse-audit.md))
+- [x] Day 22 — Task 41: Bundle analysis (entry chunk 188 → 49 kB gzip, [`docs/bundle-analysis.md`](docs/bundle-analysis.md))
+
+**All 41 tasks complete.** 🎉
 
 ## Source
 
-Task list adapted from the internship roadmap PDF (`Internship_Tasks.pdf`).
+Task lists adapted from the internship roadmap PDFs (`Internship_Tasks.pdf` — Weeks 1–5, `Internship_Tasks_2.pdf` — Weeks 6–7).
