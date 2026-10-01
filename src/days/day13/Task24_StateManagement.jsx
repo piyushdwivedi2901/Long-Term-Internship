@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Trash2 } from 'lucide-react'
-import { useTodoStore } from '../../store/todoStore.js'
+import { useTodoStore, getVisibleTodos } from '../../store/todoStore'
 
 /**
  * Day 13 — Task 24: State Management Library
@@ -31,11 +31,7 @@ export default function Task24_StateManagement() {
     setInput('')
   }
 
-  const visible = useMemo(() => {
-    if (filter === 'active') return todos.filter((t) => !t.done)
-    if (filter === 'done') return todos.filter((t) => t.done)
-    return todos
-  }, [todos, filter])
+  const visible = useMemo(() => getVisibleTodos(todos, filter), [todos, filter])
   const doneCount = todos.filter((t) => t.done).length
 
   return (

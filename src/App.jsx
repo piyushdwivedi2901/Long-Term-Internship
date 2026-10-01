@@ -26,6 +26,8 @@ import Task23_KanbanBoard from './days/day12/Task23_KanbanBoard.jsx'
 import Task24_StateManagement from './days/day13/Task24_StateManagement.jsx'
 import Task25_Testing from './days/day13/Task25_Testing.jsx'
 import Task26_Performance from './days/day13/Task26_Performance.jsx'
+import Task27_TypeScriptBasics from './days/day14/Task27_TypeScriptBasics'
+import Task28_TypedStore from './days/day14/Task28_TypedStore'
 
 // Registry of every task. Each entry drives the sidebar nav, the breadcrumb
 // header, and which component renders — add a day here and everything
@@ -83,6 +85,10 @@ const taskRegistry = [
     { id: 'd13-t25', num: 25, title: 'Testing', Component: Task25_Testing },
     { id: 'd13-t26', num: 26, title: 'Performance', Component: Task26_Performance },
   ]},
+  { day: 14, label: 'Day 14', tasks: [
+    { id: 'd14-t27', num: 27, title: 'TypeScript Basics', Component: Task27_TypeScriptBasics },
+    { id: 'd14-t28', num: 28, title: 'Typed Store', Component: Task28_TypedStore },
+  ]},
 ]
 
 const allTasks = taskRegistry.flatMap((d) => d.tasks)
@@ -99,11 +105,11 @@ export default function App() {
         <div className="sidebar-header">
           <p className="sidebar-eyebrow">react / practice-log</p>
           <h1 className="sidebar-title">Long Term Internship</h1>
-          <p className="sidebar-subtitle">26 tasks, one commit per day</p>
+          <p className="sidebar-subtitle">41 tasks, one commit per day</p>
           <div className="progress-track">
-            <div className="progress-fill" style={{ width: '100%' }} />
+            <div className="progress-fill" style={{ width: `${(28 / 41) * 100}%` }} />
           </div>
-          <p className="progress-label">26 / 26 tasks complete</p>
+          <p className="progress-label">28 / 41 tasks complete</p>
         </div>
 
         <nav className="commit-graph">

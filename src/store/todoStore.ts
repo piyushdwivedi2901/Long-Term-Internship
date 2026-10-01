@@ -1,24 +1,47 @@
 import { create } from 'zustand'
 
+export type TodoFilter = 'all' | 'active' | 'done'
+
+export interface Todo {
+  id: number
+  text: string
+  done: boolean
+}
+
+export interface TodoState {
+  todos: Todo[]
+  filter: TodoFilter
+}
+
+export interface TodoActions {
+  addTodo: (text: string) => void
+  toggleTodo: (id: number) => void
+  removeTodo: (id: number) => void
+  setFilter: (filter: TodoFilter) => void
+}
+
+export type TodoStore = TodoState & TodoActions
+
 /**
- * Zustand store for Task 24 — same to-do behavior as Task 8, but state
- * and actions live outside the component tree. The filter also lives
- * here (not in component state) to show the store owning UI state too,
- * not just data.
+ * Zustand store for Tasks 24 + 28 — to-do state and actions live outside
+ * the component tree, now fully typed: `TodoState` describes the data,
+ * `TodoActions` the only ways to change it, and `create<TodoStore>()`
+ * makes every selector (`useTodoStore((s) => s.todos)`) infer its return
+ * type automatically.
  *
- * Deliberately does NOT store a `visibleTodos` getter function as state —
- * an earlier version did, which technically worked (it reads fresh state
- * via `get()`) but isn't the conventional shape for a Zustand store.
- * Components select the raw `todos`/`filter` and derive the visible list
- * themselves with `useMemo`, the same pattern used elsewhere in this repo.
+ * The store holds data + actions only. Derived values go through the pure
+ * `getVisibleTodos` helper below (used with `useMemo` in components), not
+ * a getter function stored as state.
  */
 let nextId = 3
 
-export const useTodoStore = create((set) => ({
-  todos: [
-    { id: 1, text: 'Learn Zustand basics', done: true },
-    { id: 2, text: 'Rebuild the to-do app with it', done: false },
-  ],
+export const initialTodos: Todo[] = [
+  { id: 1, text: 'Learn Zustand basics', done: true },
+  { id: 2, text: 'Rebuild the to-do app with it', done: false },
+]
+
+export const useTodoStore = create<TodoStore>()((set) => ({
+  todos: initialTodos,
   filter: 'all',
 
   addTodo: (text) =>
@@ -35,3 +58,10 @@ export const useTodoStore = create((set) => ({
     })),
   setFilter: (filter) => set({ filter }),
 }))
+
+/** Pure derived-state helper: the todos that match the active filter. */
+export function getVisibleTodos(todos: Todo[], filter: TodoFilter): Todo[] {
+  if (filter === 'active') return todos.filter((t) => !t.done)
+  if (filter === 'done') return todos.filter((t) => t.done)
+  return todos
+}

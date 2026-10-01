@@ -933,3 +933,25 @@ input:focus, textarea:focus, select:focus {
   height: 100%;
   transition: width 0.2s ease, background 0.2s ease;
 }
+
+/* ============================================================
+   CODE BLOCKS (used by the Week 6-7 tasks to show real snippets)
+   ============================================================ */
+.code-block {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  overflow-x: auto;
+  color: var(--text-muted);
+  white-space: pre;
+  margin: 0 0 16px;
+  max-width: 640px;
+}
+.code-block .tok-key { color: var(--accent-strong); }
+.code-block .tok-type { color: var(--done); }
+.code-block .tok-err { color: var(--danger); }
+.code-block .tok-dim { color: var(--text-faint); }

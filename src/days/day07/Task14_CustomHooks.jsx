@@ -1,4 +1,4 @@
-import { useFetch } from '../../hooks/useFetch.js'
+import { useFetch } from '../../hooks/useFetch'
 import { useLocalStorage } from '../../hooks/useLocalStorage.js'
 import { useDebounce } from '../../hooks/useDebounce.js'
 import { Save, Disc, Search } from 'lucide-react'

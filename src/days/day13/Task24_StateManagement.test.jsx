@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Task24_StateManagement from './Task24_StateManagement.jsx'
-import { useTodoStore } from '../../store/todoStore.js'
+import { useTodoStore } from '../../store/todoStore'
 
 describe('Task24_StateManagement (Zustand)', () => {
   beforeEach(() => {

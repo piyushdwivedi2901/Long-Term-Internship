@@ -1,30 +1,19 @@
 import { useMemo, useState } from 'react'
-import { Sparkles, ArrowUpDown } from 'lucide-react'
+import { ArrowUpDown } from 'lucide-react'
+import { ProfileCard } from '../../components/ProfileCard'
 
 /**
  * Day 1 — Task 2: Props Practice
  * Goal: Convert the static card into a reusable <ProfileCard name="" bio="" />
  * component and render 3-4 different ones by passing different props.
  *
+ * (ProfileCard now lives in components/ProfileCard.tsx — typed in Task 27.)
+ *
  * Extended: each card also takes a `field` and `year` prop to demonstrate
  * passing several props of different types (string, number), plus a sort
  * control that reorders the rendered cards by year — a small taste of
  * props + derived state working together.
  */
-function ProfileCard({ name, bio, image, field, year }) {
-  return (
-    <div className="card">
-      <img className="card-avatar" src={image} alt={name} />
-      <h3 className="card-name">{name}</h3>
-      <p className="pill" style={{ marginBottom: 8 }}>
-        <Sparkles size={11} /> {field}
-      </p>
-      <p className="card-bio">{bio}</p>
-      <p className="hint" style={{ marginTop: 10, marginBottom: 0 }}>Active {year}</p>
-    </div>
-  )
-}
-
 const people = [
   {
     name: 'Ada Lovelace',
