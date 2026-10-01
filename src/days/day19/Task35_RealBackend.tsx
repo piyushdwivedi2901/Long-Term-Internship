@@ -18,7 +18,7 @@ interface Props {
 
 type Status = 'loading' | 'ready' | 'error'
 
-function TodoApp({ api }: { api: Api }) {
+export function TodoApp({ api }: { api: Api }) {
   const [todos, setTodos] = useState<Todo[]>([])
   const [status, setStatus] = useState<Status>('loading')
   const [loadError, setLoadError] = useState('')

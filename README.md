@@ -92,6 +92,10 @@ npm test         # run the test suite (Task 25)
 - [x] Day 18 — Task 34: Animation (framer-motion: list add/remove, drag feedback, route transitions)
 - [x] Day 19 — Task 35: Real backend (Express + SQLite persistence, demo-mode fallback)
 
+### Week 7: Full-Stack Integration & Production Readiness
+- [x] Day 20 — Task 36: Auth (email/password, scrypt + JWT, protected route, per-user data)
+- [x] Day 20 — Task 37: TanStack Query (`useJson`, caching, refetch-on-focus)
+
 ## Source
 
 Task list adapted from the internship roadmap PDF (`Internship_Tasks.pdf`).

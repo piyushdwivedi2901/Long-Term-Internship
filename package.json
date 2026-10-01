@@ -14,8 +14,10 @@
     "dev:full": "node scripts/dev-full.mjs"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.104.0",
     "express": "^5.2.1",
     "framer-motion": "^13.4.6",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.441.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

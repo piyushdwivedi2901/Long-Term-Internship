@@ -1,4 +1,4 @@
-import { useFetch } from '../../hooks/useFetch'
+import { useJson } from '../../hooks/useJson'
 import { useLocalStorage } from '../../hooks/useLocalStorage.js'
 import { useDebounce } from '../../hooks/useDebounce.js'
 import { Save, Disc, Search } from 'lucide-react'
@@ -7,9 +7,10 @@ import { useMemo, useState } from 'react'
 /**
  * Day 7 — Task 14: Custom Hooks
  * Goal: Extract reusable logic like useFetch or useLocalStorage.
+ * (Task 37: the fetch hook is now backed by TanStack Query.)
  *
  * Extended to demonstrate three hooks working together: useDebounce
- * settles a search box, its debounced value is used as the `useFetch`
+ * settles a search box, its debounced value is used as the `useJson`
  * URL (so the request only fires once typing pauses), and the last
  * search term is preserved with useLocalStorage across reloads.
  */
@@ -22,7 +23,7 @@ export default function Task14_CustomHooks() {
     () => `https://jsonplaceholder.typicode.com/comments?email_like=${encodeURIComponent(debouncedTerm)}`,
     [debouncedTerm]
   )
-  const { data: comments, status } = useFetch(debouncedTerm ? url : null)
+  const { data: comments, status } = useJson(debouncedTerm ? url : null)
 
   const handleSave = () => setSavedTerm(term)
 
@@ -30,7 +31,7 @@ export default function Task14_CustomHooks() {
     <div className="task-section">
       <p className="task-eyebrow">Custom Hooks</p>
       <h2>Custom Hooks</h2>
-      <p className="task-goal">Three reusable hooks composed together — <code>useDebounce</code> settles typing, <code>useFetch</code> fires the request, <code>useLocalStorage</code> remembers the last search.</p>
+      <p className="task-goal">Three reusable hooks composed together — <code>useDebounce</code> settles typing, <code>useJson</code> (TanStack Query, cached) fires the request, <code>useLocalStorage</code> remembers the last search.</p>
 
       <div style={{ position: 'relative', maxWidth: 300, marginBottom: 10 }}>
         <Search size={14} style={{ position: 'absolute', left: 10, top: 10, color: 'var(--text-faint)' }} />

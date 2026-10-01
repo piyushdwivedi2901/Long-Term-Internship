@@ -6,7 +6,7 @@ import { openDb } from './db.js'
 
 let app
 beforeEach(() => {
-  app = createApp(openDb(':memory:'))
+  app = createApp(openDb(':memory:'), { jwtSecret: 's' })
 })
 
 describe('todos API (SQLite)', () => {
@@ -53,8 +53,8 @@ describe('persistence', () => {
     const { mkdtempSync } = await import('node:fs')
     const { tmpdir } = await import('node:os')
     const file = `${mkdtempSync(`${tmpdir()}/todos-`)}/t.sqlite`
-    await request(createApp(openDb(file))).post('/api/todos').send({ text: 'persist me' })
-    const again = await request(createApp(openDb(file))).get('/api/todos')
+    await request(createApp(openDb(file), { jwtSecret: 's' })).post('/api/todos').send({ text: 'persist me' })
+    const again = await request(createApp(openDb(file), { jwtSecret: 's' })).get('/api/todos')
     expect(again.body.map((t) => t.text)).toEqual(['persist me'])
   })
 })

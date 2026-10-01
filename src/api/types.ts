@@ -11,11 +11,32 @@ export interface TodosApi {
   remove(id: number): Promise<void>
 }
 
+export interface User {
+  id: number
+  email: string
+}
+
+export interface Session {
+  token: string
+  user: User
+}
+
+export interface AuthApi {
+  signup(email: string, password: string): Promise<Session>
+  login(email: string, password: string): Promise<Session>
+  /** Validates a stored token and returns its user (rejects with 401 if stale). */
+  me(): Promise<User>
+}
+
 export interface Api {
   /** 'server' = Express + SQLite over HTTP; 'demo' = in-browser (localStorage). */
   mode: 'server' | 'demo'
   todos: TodosApi
+  auth: AuthApi
 }
+
+/** Returns the current auth token, or null when signed out. */
+export type TokenGetter = () => string | null
 
 export class ApiError extends Error {
   status: number

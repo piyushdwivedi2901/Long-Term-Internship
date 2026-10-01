@@ -34,6 +34,8 @@ import Task32_Portals from './days/day17/Task32_Portals'
 import Task33_AccessibilityPass from './days/day17/Task33_AccessibilityPass'
 import Task34_Animation from './days/day18/Task34_Animation'
 import Task35_RealBackend from './days/day19/Task35_RealBackend'
+import Task36_Auth from './days/day20/Task36_Auth'
+import Task37_TanStackQuery from './days/day20/Task37_TanStackQuery'
 
 export interface TaskEntry {
   id: string
@@ -126,6 +128,10 @@ export const taskRegistry: DayEntry[] = [
   ]},
   { day: 19, label: 'Day 19', tasks: [
     { id: 'd19-t35', num: 35, title: 'Real Backend', Component: Task35_RealBackend },
+  ]},
+  { day: 20, label: 'Day 20', tasks: [
+    { id: 'd20-t36', num: 36, title: 'Auth', Component: Task36_Auth },
+    { id: 'd20-t37', num: 37, title: 'TanStack Query', Component: Task37_TanStackQuery },
   ]},
 ]
 

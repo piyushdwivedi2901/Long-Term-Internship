@@ -1085,3 +1085,11 @@ kbd {
   .kanban-card, .kanban-column { transition: none; }
   .kanban-card:hover, .kanban-card.is-dragging { transform: none; }
 }
+
+/* Auth (Task 36) */
+.auth-form { display: flex; flex-direction: column; gap: 12px; max-width: 320px; }
+.auth-form h3 { margin: 0; }
+.field { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; color: var(--text-muted); }
+.field input { width: 100%; }
+.router-nav button { font-size: 0.82rem; }
+.t37-panel { min-height: 56px; margin: 10px 0; }
