@@ -89,6 +89,7 @@ npm test         # run the test suite (Task 25)
 - [x] Day 16 — Task 31: Compound components (`DayNav`)
 - [x] Day 17 — Task 32: Portals (accessible `Modal`, view-cart flow)
 - [x] Day 17 — Task 33: Accessibility pass (axe audit, keyboard Kanban, contrast) — see [`docs/accessibility-audit.md`](docs/accessibility-audit.md)
+- [x] Day 18 — Task 34: Animation (framer-motion: list add/remove, drag feedback, route transitions)
 
 ## Source
 

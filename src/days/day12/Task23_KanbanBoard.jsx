@@ -36,6 +36,7 @@ export default function Task23_KanbanBoard() {
   const [columns, setColumns] = useState(initialColumns)
   const [tasks, setTasks] = useState(initialTasks)
   const [dragging, setDragging] = useState(null) // { taskId, fromColumn }
+  const [overColumn, setOverColumn] = useState(null)
   const [drafts, setDrafts] = useState({ todo: '', inProgress: '', done: '' })
   const [announcement, setAnnouncement] = useState('')
   const focusCardId = useRef(null)
@@ -65,6 +66,7 @@ export default function Task23_KanbanBoard() {
     if (!dragging) return
     moveTask(dragging.taskId, dragging.fromColumn, toColumn)
     setDragging(null)
+    setOverColumn(null)
   }
 
   const moveByKeyboard = (taskId, fromColumn, direction) => {
@@ -105,9 +107,9 @@ export default function Task23_KanbanBoard() {
         {Object.entries(columns).map(([colId, col]) => (
           <section
             key={colId}
-            className="kanban-column"
+            className={`kanban-column ${overColumn === colId && dragging ? 'drag-over' : ''}`}
             aria-labelledby={`col-${colId}`}
-            onDragOver={(e) => e.preventDefault()}
+            onDragOver={(e) => { e.preventDefault(); if (overColumn !== colId) setOverColumn(colId) }}
             onDrop={() => handleDrop(colId)}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -119,12 +121,13 @@ export default function Task23_KanbanBoard() {
             {col.taskIds.map((taskId, i) => (
               <li
                 key={taskId}
-                className="kanban-card"
+                className={`kanban-card ${dragging?.taskId === taskId ? 'is-dragging' : ''}`}
                 draggable
                 tabIndex={0}
                 data-card-id={taskId}
                 aria-label={`${tasks[taskId].text}, ${tasks[taskId].priority} priority, card ${i + 1} of ${col.taskIds.length} in ${col.title}. Press left or right arrow to move.`}
                 onDragStart={() => handleDragStart(taskId, colId)}
+                onDragEnd={() => { setDragging(null); setOverColumn(null) }}
                 onKeyDown={(e) => onCardKeyDown(e, taskId, colId)}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 6 }}>

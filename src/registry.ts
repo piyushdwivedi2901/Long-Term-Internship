@@ -32,6 +32,7 @@ import Task30_CodeSplitting from './days/day15/Task30_CodeSplitting'
 import Task31_CompoundComponents from './days/day16/Task31_CompoundComponents'
 import Task32_Portals from './days/day17/Task32_Portals'
 import Task33_AccessibilityPass from './days/day17/Task33_AccessibilityPass'
+import Task34_Animation from './days/day18/Task34_Animation'
 
 export interface TaskEntry {
   id: string
@@ -118,6 +119,9 @@ export const taskRegistry: DayEntry[] = [
   { day: 17, label: 'Day 17', tasks: [
     { id: 'd17-t32', num: 32, title: 'Portals (Modal)', Component: Task32_Portals },
     { id: 'd17-t33', num: 33, title: 'Accessibility Pass', Component: Task33_AccessibilityPass },
+  ]},
+  { day: 18, label: 'Day 18', tasks: [
+    { id: 'd18-t34', num: 34, title: 'Animation', Component: Task34_Animation },
   ]},
 ]
 
