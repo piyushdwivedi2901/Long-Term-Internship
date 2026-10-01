@@ -28,6 +28,8 @@ import Task25_Testing from './days/day13/Task25_Testing.jsx'
 import Task26_Performance from './days/day13/Task26_Performance.jsx'
 import Task27_TypeScriptBasics from './days/day14/Task27_TypeScriptBasics'
 import Task28_TypedStore from './days/day14/Task28_TypedStore'
+import Task29_ErrorBoundaries from './days/day15/Task29_ErrorBoundaries'
+import Task30_CodeSplitting from './days/day15/Task30_CodeSplitting'
 
 // Registry of every task. Each entry drives the sidebar nav, the breadcrumb
 // header, and which component renders — add a day here and everything
@@ -89,6 +91,10 @@ const taskRegistry = [
     { id: 'd14-t27', num: 27, title: 'TypeScript Basics', Component: Task27_TypeScriptBasics },
     { id: 'd14-t28', num: 28, title: 'Typed Store', Component: Task28_TypedStore },
   ]},
+  { day: 15, label: 'Day 15', tasks: [
+    { id: 'd15-t29', num: 29, title: 'Error Boundaries', Component: Task29_ErrorBoundaries },
+    { id: 'd15-t30', num: 30, title: 'Code Splitting', Component: Task30_CodeSplitting },
+  ]},
 ]
 
 const allTasks = taskRegistry.flatMap((d) => d.tasks)
@@ -107,9 +113,9 @@ export default function App() {
           <h1 className="sidebar-title">Long Term Internship</h1>
           <p className="sidebar-subtitle">41 tasks, one commit per day</p>
           <div className="progress-track">
-            <div className="progress-fill" style={{ width: `${(28 / 41) * 100}%` }} />
+            <div className="progress-fill" style={{ width: `${(30 / 41) * 100}%` }} />
           </div>
-          <p className="progress-label">28 / 41 tasks complete</p>
+          <p className="progress-label">30 / 41 tasks complete</p>
         </div>
 
         <nav className="commit-graph">
