@@ -95,6 +95,8 @@ npm test         # run the test suite (Task 25)
 ### Week 7: Full-Stack Integration & Production Readiness
 - [x] Day 20 — Task 36: Auth (email/password, scrypt + JWT, protected route, per-user data)
 - [x] Day 20 — Task 37: TanStack Query (`useJson`, caching, refetch-on-focus)
+- [x] Day 21 — Task 38: Forms at scale (React Hook Form + Zod vs the manual form, with measurements)
+- [x] Day 21 — Task 39: E2E testing (Playwright: todo, cart/checkout, navigation, real-API suites)
 
 ## Source
 

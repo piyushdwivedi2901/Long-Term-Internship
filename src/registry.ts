@@ -36,6 +36,7 @@ import Task34_Animation from './days/day18/Task34_Animation'
 import Task35_RealBackend from './days/day19/Task35_RealBackend'
 import Task36_Auth from './days/day20/Task36_Auth'
 import Task37_TanStackQuery from './days/day20/Task37_TanStackQuery'
+import Task38_FormsAtScale from './days/day21/Task38_FormsAtScale'
 
 export interface TaskEntry {
   id: string
@@ -132,6 +133,9 @@ export const taskRegistry: DayEntry[] = [
   { day: 20, label: 'Day 20', tasks: [
     { id: 'd20-t36', num: 36, title: 'Auth', Component: Task36_Auth },
     { id: 'd20-t37', num: 37, title: 'TanStack Query', Component: Task37_TanStackQuery },
+  ]},
+  { day: 21, label: 'Day 21', tasks: [
+    { id: 'd21-t38', num: 38, title: 'Forms at Scale', Component: Task38_FormsAtScale },
   ]},
 ]
 
