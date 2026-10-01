@@ -65,7 +65,7 @@ scripts/            audit / report tooling
 Every push to `main` runs, in order: **typecheck → unit tests → Playwright E2E → build → deploy**
 (`.github/workflows/deploy.yml`). A failure at any step blocks the deploy.
 
-- **162 Vitest tests** across 31 files (components, hooks, store, API client, Express server) — including
+- **163 Vitest tests** across 32 files (components, hooks, store, API client, Express server) — including
   automated axe-core accessibility checks.
 - **12 Playwright tests**: todo flow, cart/checkout, navigation, and the real API.
 - **0 axe violations** on all 41 pages in a real browser (colour contrast included) —

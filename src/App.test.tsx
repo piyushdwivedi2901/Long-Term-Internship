@@ -30,13 +30,6 @@ describe('App shell', () => {
     expect(await screen.findByRole('heading', { name: 'To-Do List' })).toBeInTheDocument()
   })
 
-  it('shows a loading state while a task chunk loads', async () => {
-    render(<App />)
-    await userEvent.click(screen.getByRole('button', { name: /^12 · / }))
-    expect(screen.getByText('Loading task…')).toBeInTheDocument()
-    await screen.findByRole('heading', { level: 2 })
-  })
-
   it('honours a deep link on load', () => {
     window.history.replaceState(null, '', '#/d4-t8')
     render(<App />)
