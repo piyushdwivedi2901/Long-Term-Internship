@@ -1,0 +1,18 @@
+# One-click deploy of the Flowboard capstone (Express + SQLite + built frontend)
+# to Render: New → Blueprint → pick this repository.
+services:
+  - type: web
+    name: flowboard
+    runtime: docker
+    rootDir: capstone
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+    # A persistent disk keeps the SQLite database across deploys (paid plans).
+    # Without it the app still runs, but data resets when the service restarts.
+    disk:
+      name: flowboard-data
+      mountPath: /data
+      sizeGB: 1
