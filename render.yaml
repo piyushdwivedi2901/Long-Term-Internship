@@ -46,3 +46,18 @@ services:
       name: covered-data
       mountPath: /data
       sizeGB: 1
+
+  # Couch Cup — EA FC tournament hub (couchcup/)
+  - type: web
+    name: couchcup
+    runtime: docker
+    rootDir: couchcup
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+    disk:
+      name: couchcup-data
+      mountPath: /data
+      sizeGB: 1

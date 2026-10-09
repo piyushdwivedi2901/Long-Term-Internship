@@ -61,6 +61,22 @@ It answers one question fast: **is it still covered?**
 Choose "Explore with sample items". Details are in the
 [Covered README](covered/README.md).
 
+## Project 4: Couch Cup
+
+[`couchcup/`](couchcup/) is a tournament hub for friends who play EA FC
+together:
+
+- Leagues with auto-drawn fixtures and a proper table
+- Seeded knockout cups with byes, extra time and penalty shoot-outs
+- An Elo power ranking that moves with every match
+- Head-to-head records
+- Player profiles with rating history
+- A "fair spin" that hands both players random clubs of the same strength
+
+**▶ Try it:** https://piyushdwivedi2901.github.io/Long-Term-Internship/couchcup/
+Choose "Explore with a sample crew". Details are in the
+[Couch Cup README](couchcup/README.md).
+
 ## Running it locally
 
 ```bash
