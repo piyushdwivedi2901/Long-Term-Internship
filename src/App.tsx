@@ -52,6 +52,10 @@ export default function App() {
           <p className="progress-label">
             {done} / {ROADMAP_TOTAL} tasks complete
           </p>
+          <a className="capstone-link" href={`${import.meta.env.BASE_URL}flowboard/`}>
+            <span className="capstone-link__kicker">Capstone project</span>
+            <span className="capstone-link__name">Open Flowboard</span>
+          </a>
         </div>
 
         <DayNav value={active.id} onValueChange={select} aria-label="Internship tasks">

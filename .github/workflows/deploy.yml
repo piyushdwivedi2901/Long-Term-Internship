@@ -3,6 +3,7 @@ name: Build, Test, and Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -11,55 +12,102 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  # The 41-task portfolio app (repo root)
+  portfolio:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
       - name: Install dependencies
         run: npm ci
-
       - name: Type check
         run: npm run typecheck
-
-      - name: Run tests
+      - name: Unit tests
         run: npm test
-
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
-
       - name: End-to-end tests
         run: npm run test:e2e
-
       - name: Upload Playwright report
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: portfolio-playwright-report
           path: playwright-report
           retention-days: 7
-
       - name: Build
         run: npm run build
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
+          name: portfolio-dist
           path: dist
+          retention-days: 1
+
+  # Flowboard, the capstone project (capstone/)
+  capstone:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: capstone
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: capstone/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Type check
+        run: npm run typecheck
+      - name: Unit, API and integration tests
+        run: npm test
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end tests (static demo build + Express/SQLite server)
+        run: npm run test:e2e
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capstone-playwright-report
+          path: capstone/playwright-report
+          retention-days: 7
+      - name: Build for GitHub Pages
+        run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: capstone-dist
+          path: capstone/dist
+          retention-days: 1
+
+  package:
+    needs: [portfolio, capstone]
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: portfolio-dist
+          path: site
+      - uses: actions/download-artifact@v4
+        with:
+          name: capstone-dist
+          path: site/flowboard
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
 
   deploy:
-    needs: build
+    needs: package
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

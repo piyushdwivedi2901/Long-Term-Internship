@@ -6,6 +6,22 @@ browsable portfolio app.
 
 **🔗 Live demo:** https://piyushdwivedi2901.github.io/Long-Term-Internship/
 
+## Capstone: Flowboard
+
+[`capstone/`](capstone/) is a full-stack project and task manager that brings
+the roadmap together into one product:
+
+- React 19 + TypeScript frontend
+- Express + SQLite backend with auth
+- Kanban boards with keyboard drag-and-drop
+- A dashboard, a command palette, and light and dark themes
+- Unit, contract and Playwright tests
+
+**▶ Try it:** https://piyushdwivedi2901.github.io/Long-Term-Internship/flowboard/
+Choose "Explore with sample data". The [capstone README](capstone/README.md)
+covers the architecture, how each task maps into it, and how to deploy the
+real server.
+
 Every task lives under `src/days/dayNN/` and is registered in `src/registry.ts`, which drives the
 sidebar (a literal commit graph, one node per day), breadcrumbs, `#/d17-t32`-style deep links and the
 progress bar. Each task is its own lazily-loaded chunk.
@@ -30,6 +46,8 @@ Requires **Node 22+** (the API uses the built-in `node:sqlite`).
 | `npm run analyze` | Build + interactive bundle treemap in `stats/` |
 | `npm run audit:a11y` | axe-core on every task page in real Chromium (needs `preview` running) |
 | `npm run lighthouse -- <url> <out.json>` | Lighthouse report |
+
+The capstone has its own scripts — see [`capstone/README.md`](capstone/README.md).
 
 ## Backend: real server vs. demo mode
 
@@ -62,8 +80,10 @@ scripts/            audit / report tooling
 
 ## Quality gates
 
-Every push to `main` runs, in order: **typecheck → unit tests → Playwright E2E → build → deploy**
-(`.github/workflows/deploy.yml`). A failure at any step blocks the deploy.
+Every push to `main` runs two jobs in parallel, one for the portfolio and one
+for the capstone. Each job runs **typecheck → unit tests → Playwright E2E →
+build**. Both builds are then published together to GitHub Pages
+(`.github/workflows/deploy.yml`). A failure in either job blocks the deploy.
 
 - **163 Vitest tests** across 32 files (components, hooks, store, API client, Express server) — including
   automated axe-core accessibility checks.
