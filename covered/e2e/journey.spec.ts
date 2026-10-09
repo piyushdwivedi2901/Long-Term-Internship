@@ -12,7 +12,7 @@ test.describe('Covered (static demo build)', () => {
     const files = page.getByRole('region', { name: 'Bill & photos' })
     await files.getByRole('button', { name: /daikin-invoice\.pdf/ }).click()
     const viewer = page.getByRole('dialog', { name: 'daikin-invoice.pdf' })
-    await expect(viewer.getByRole('link', { name: 'Download' })).toBeVisible()
+    await expect(viewer.getByRole('link', { name: 'Download', exact: true })).toBeVisible() // browsers without a PDF viewer also get a "Download it" fallback
     await viewer.getByRole('button', { name: 'Done' }).click()
 
     await page.getByRole('button', { name: 'Log a repair' }).click()
