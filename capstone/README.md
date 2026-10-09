@@ -125,7 +125,7 @@ npm run dev:full     # frontend + Express/SQLite API (Vite proxies /api to :4000
 
 | Script | What it does |
 |---|---|
-| `npm test` | 52 unit, API, contract and UI integration tests (Vitest) |
+| `npm test` | 54 unit, API, contract and UI integration tests (Vitest) |
 | `npm run test:e2e` | 10 Playwright tests against the static build *and* the production server |
 | `npm run typecheck` | Strict `tsc` over client, server, shared code and tests |
 | `npm run build` | Static build for GitHub Pages (demo backend) |

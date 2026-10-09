@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -38,7 +38,7 @@ export function SettleDialog({ open, onClose, group, preset }: { open: boolean; 
   const fallbackTo = group.members.find((m) => m.id !== group.myMemberId)?.id ?? group.myMemberId
   const { register, handleSubmit, reset, setError, formState: { errors, isSubmitting } } = useForm<Values>({ resolver: zodResolver(schema) })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open) {
       reset({
         fromMember: String(preset?.from ?? group.myMemberId),

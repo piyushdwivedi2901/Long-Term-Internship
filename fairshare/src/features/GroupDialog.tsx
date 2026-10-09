@@ -1,4 +1,4 @@
-import { useEffect, useState, type KeyboardEvent } from 'react'
+import { useLayoutEffect, useState, type KeyboardEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
@@ -32,7 +32,7 @@ export function GroupDialog({ open, onClose, group }: { open: boolean; onClose()
   const [peopleError, setPeopleError] = useState('')
   const { register, handleSubmit, reset, setError, formState: { errors, isSubmitting } } = useForm<Values>({ resolver: zodResolver(schema) })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open) {
       reset({ name: group?.name ?? '', emoji: (group?.emoji as Values['emoji']) ?? '🏖️', currency: group?.currency ?? 'INR' })
       setPeople([])

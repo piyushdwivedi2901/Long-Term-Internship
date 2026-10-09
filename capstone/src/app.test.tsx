@@ -51,6 +51,7 @@ describe('projects and tasks', () => {
 
     await user.click(screen.getAllByRole('button', { name: 'New project' })[0])
     const dialog = await screen.findByRole('dialog', { name: 'New project' })
+    await waitFor(() => expect(within(dialog).getByLabelText('Name')).toHaveFocus())
     await user.click(within(dialog).getByRole('button', { name: 'Create project' }))
     expect(await within(dialog).findByText('Give the project a name')).toBeInTheDocument()
     await user.type(within(dialog).getByLabelText('Name'), 'Capstone')
@@ -60,6 +61,7 @@ describe('projects and tasks', () => {
     expect(await screen.findByRole('heading', { level: 1, name: /Capstone/ })).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Add the first task' }))
     const taskDialog = await screen.findByRole('dialog', { name: 'New task' })
+    await waitFor(() => expect(within(taskDialog).getByLabelText('Title')).toHaveFocus()) // dialog fully mounted
     await user.selectOptions(within(taskDialog).getByLabelText('Status'), 'review')
     await user.type(within(taskDialog).getByLabelText('Title'), 'Write the README')
     await user.type(within(taskDialog).getByLabelText('Labels'), 'Docs, docs, writing')

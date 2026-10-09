@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useState } from 'react'
+import { useLayoutEffect, useId, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -125,7 +125,7 @@ export function ExpenseDialog({ open, onClose, group, expense }: Props) {
     defaultValues: defaults(),
   })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open) {
       reset(defaults())
       setDraft(draftFrom(group, expense))

@@ -16,22 +16,22 @@ export default defineConfig({
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   use: { trace: 'on-first-retry', screenshot: 'only-on-failure', launchOptions },
   projects: [
-    { name: 'demo', testIgnore: /server\.spec\.ts/, use: { ...devices['Desktop Chrome'], baseURL: 'http://localhost:4190/Long-Term-Internship/fairshare/' } },
-    { name: 'server', testMatch: /server\.spec\.ts/, use: { ...devices['Desktop Chrome'], baseURL: 'http://localhost:4192/' } },
+    { name: 'demo', testIgnore: /server\.spec\.ts/, use: { ...devices['Desktop Chrome'], baseURL: 'http://localhost:4290/Long-Term-Internship/fairshare/' } },
+    { name: 'server', testMatch: /server\.spec\.ts/, use: { ...devices['Desktop Chrome'], baseURL: 'http://localhost:4292/' } },
   ],
   webServer: [
     {
-      command: 'npx vite build && npx vite preview --port 4190 --strictPort',
-      url: 'http://localhost:4190/Long-Term-Internship/fairshare/',
+      command: 'npx vite build && npx vite preview --port 4290 --strictPort',
+      url: 'http://localhost:4290/Long-Term-Internship/fairshare/',
       reuseExistingServer: !process.env.CI,
       timeout: 180_000,
     },
     {
       command: 'npm run build:server && node server/index.ts',
-      url: 'http://localhost:4192/api/health',
+      url: 'http://localhost:4292/api/health',
       reuseExistingServer: !process.env.CI,
       timeout: 180_000,
-      env: { NODE_ENV: 'production', PORT: '4192', JWT_SECRET: 'e2e-secret', DB_FILE: ':memory:', STATIC_DIR: 'dist-server' },
+      env: { NODE_ENV: 'production', PORT: '4292', JWT_SECRET: 'e2e-secret', DB_FILE: ':memory:', STATIC_DIR: 'dist-server' },
     },
   ],
 })

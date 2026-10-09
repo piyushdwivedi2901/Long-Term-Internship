@@ -8,6 +8,7 @@ type User = ReturnType<typeof userEvent.setup>
 async function createGroup(user: User, name: string, people: string[]) {
   await user.click((await screen.findAllByRole('button', { name: /New group|Create a group/ }))[0])
   const d = await screen.findByRole('dialog', { name: 'New group' })
+  await waitFor(() => expect(within(d).getByLabelText('Group name')).toHaveFocus())
   await user.type(within(d).getByLabelText('Group name'), name)
   for (const p of people) await user.type(within(d).getByLabelText("Who's in it, besides you?"), `${p}{Enter}`)
   await user.click(within(d).getByRole('button', { name: 'Create group' }))
@@ -17,6 +18,7 @@ async function createGroup(user: User, name: string, people: string[]) {
 async function addExpense(user: User, amount: string, description: string, setup?: (d: HTMLElement) => Promise<void>) {
   await user.click((await screen.findAllByRole('button', { name: /Add (the first )?expense/ }))[0])
   const d = await screen.findByRole('dialog', { name: 'Add an expense' })
+  await waitFor(() => expect(within(d).getByLabelText(/^Amount/)).toHaveFocus()) // dialog fully mounted
   await user.type(within(d).getByLabelText(/^Amount/), amount)
   await user.type(within(d).getByLabelText('What was it for?'), description)
   await setup?.(d)

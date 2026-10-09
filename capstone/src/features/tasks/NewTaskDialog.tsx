@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
@@ -25,7 +25,7 @@ export function NewTaskDialog() {
   })
   const { register, handleSubmit, reset, setError, formState: { errors, isSubmitting } } = form
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (preset) {
       reset({
         title: '',

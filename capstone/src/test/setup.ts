@@ -23,3 +23,7 @@ if (typeof window !== 'undefined' && !window.matchMedia) {
     }) as MediaQueryList
 }
 if (typeof window !== 'undefined' && !window.HTMLElement.prototype.scrollIntoView) window.HTMLElement.prototype.scrollIntoView = () => {}
+
+// Global UI state (Zustand) is module-level: start every test from a clean slate.
+import { useUi } from '../lib/uiStore.ts'
+afterEach(() => useUi.setState({ toasts: [], paletteOpen: false, newTask: null, newProjectOpen: false }))

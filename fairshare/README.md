@@ -90,7 +90,7 @@ npm run dev:full   # UI + Express/SQLite API (Vite proxies /api to :4100)
 
 | Script | What it does |
 |---|---|
-| `npm test` | 53 tests: money/split/balance fuzzing, services, HTTP API, backend contract, CSV, full UI flows |
+| `npm test` | 55 tests: money/split/balance fuzzing, services, HTTP API, backend contract, CSV, dialogs, full UI flows |
 | `npm run test:e2e` | 9 Playwright tests: trip journey, invite link, CSV, keyboard, phone, axe (light and dark), and two real devices sharing a group through the server |
 | `npm run typecheck` | Strict TypeScript over everything |
 | `npm run build` | Static build for GitHub Pages |

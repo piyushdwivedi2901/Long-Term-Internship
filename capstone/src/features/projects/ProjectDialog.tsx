@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
@@ -38,7 +38,7 @@ export function ProjectDialog({ open, onClose, project }: { open: boolean; onClo
     resolver: zodResolver(formSchema),
   })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open) reset({ name: project?.name ?? '', description: project?.description ?? '', color: project?.color ?? 'blue' })
   }, [open, project, reset])
 

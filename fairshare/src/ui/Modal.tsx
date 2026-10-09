@@ -19,6 +19,15 @@ export interface ModalProps {
   initialFocus?: RefObject<HTMLElement | null>
 }
 
+/** Counted scroll lock, so overlapping dialogs (one closing while another opens) can't leave the page stuck. */
+let openDialogs = 0
+const lockScroll = () => {
+  if (openDialogs++ === 0) document.body.style.overflow = 'hidden'
+}
+const unlockScroll = () => {
+  if (--openDialogs === 0) document.body.style.overflow = ''
+}
+
 /**
  * Accessible dialog in a portal: focus moves in, is trapped, and returns to
  * the opener; Escape and backdrop clicks close it; page scroll is locked.
@@ -50,12 +59,17 @@ function Inner({ onClose, title, description, children, footer, size = 'md', she
 
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null
+    const dialog = ref.current!
     ;(initialFocus?.current ?? ref.current!.querySelector<HTMLElement>('[data-autofocus]') ?? ref.current!).focus()
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    lockScroll()
     return () => {
-      document.body.style.overflow = prev
-      if (opener?.isConnected) opener.focus()
+      unlockScroll()
+      // Give focus back to whatever opened the dialog — but only if focus is
+      // still in this dialog or was lost. If the user has already moved on (e.g.
+      // another dialog opened while this one animated out), don't steal it.
+      const active = document.activeElement
+      const lost = !active || active === document.body || dialog.contains(active) || !active.isConnected
+      if (lost && opener?.isConnected) opener.focus()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
