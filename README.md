@@ -43,6 +43,24 @@ dinners, solving a different problem from Flowboard:
 Choose "Explore with sample groups". Details are in the
 [Fairshare README](fairshare/README.md).
 
+## Project 3: Covered
+
+[`covered/`](covered/) is a warranty and bill locker for the things you own.
+It answers one question fast: **is it still covered?**
+
+- Tracks every cover on an item, including part warranties (a 10-year
+  compressor) and extended plans that start when the standard one ends
+- Plain-language answers to "is the fridge still covered?"
+- Bills and photos stored with each item
+- Reminders as a calendar file for Google, Apple or Outlook
+- A claim kit: serial number, invoice and a ready-to-send message for the
+  service centre
+- A repair log
+
+**▶ Try it:** https://piyushdwivedi2901.github.io/Long-Term-Internship/covered/
+Choose "Explore with sample items". Details are in the
+[Covered README](covered/README.md).
+
 ## Running it locally
 
 ```bash

@@ -60,6 +60,10 @@ export default function App() {
             <span className="capstone-link__kicker">Project</span>
             <span className="capstone-link__name">Open Fairshare</span>
           </a>
+          <a className="capstone-link" href={`${import.meta.env.BASE_URL}covered/`}>
+            <span className="capstone-link__kicker">Project</span>
+            <span className="capstone-link__name">Open Covered</span>
+          </a>
         </div>
 
         <DayNav value={active.id} onValueChange={select} aria-label="Internship tasks">

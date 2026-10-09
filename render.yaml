@@ -31,3 +31,18 @@ services:
       name: fairshare-data
       mountPath: /data
       sizeGB: 1
+
+  # Covered — warranty and bill locker (covered/)
+  - type: web
+    name: covered
+    runtime: docker
+    rootDir: covered
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+    disk:
+      name: covered-data
+      mountPath: /data
+      sizeGB: 1
