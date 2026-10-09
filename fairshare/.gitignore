@@ -1,0 +1,7 @@
+node_modules
+dist
+dist-server
+*.sqlite*
+test-results
+playwright-report
+.env
