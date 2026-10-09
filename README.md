@@ -26,6 +26,23 @@ Every task lives under `src/days/dayNN/` and is registered in `src/registry.ts`,
 sidebar (a literal commit graph, one node per day), breadcrumbs, `#/d17-t32`-style deep links and the
 progress bar. Each task is its own lazily-loaded chunk.
 
+
+## Project 2: Fairshare
+
+[`fairshare/`](fairshare/) is a shared-expense splitter for trips, flatmates and
+dinners, solving a different problem from Flowboard:
+
+- Exact money arithmetic, stored in paise
+- Four ways to split a bill (equal, exact amounts, percentages, shares)
+- Live balances
+- A settle-up planner that clears the whole group in at most n − 1 payments
+- Invite codes, so real accounts can share a group
+- CSV export
+
+**▶ Try it:** https://piyushdwivedi2901.github.io/Long-Term-Internship/fairshare/
+Choose "Explore with sample groups". Details are in the
+[Fairshare README](fairshare/README.md).
+
 ## Running it locally
 
 ```bash

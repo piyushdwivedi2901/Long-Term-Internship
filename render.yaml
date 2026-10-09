@@ -1,4 +1,4 @@
-# One-click deploy of the Flowboard capstone (Express + SQLite + built frontend)
+# One-click deploy of both full-stack projects (Express + SQLite + built frontend)
 # to Render: New → Blueprint → pick this repository.
 services:
   - type: web
@@ -14,5 +14,20 @@ services:
     # Without it the app still runs, but data resets when the service restarts.
     disk:
       name: flowboard-data
+      mountPath: /data
+      sizeGB: 1
+
+  # Fairshare — shared-expense splitter (fairshare/)
+  - type: web
+    name: fairshare
+    runtime: docker
+    rootDir: fairshare
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+    disk:
+      name: fairshare-data
       mountPath: /data
       sizeGB: 1

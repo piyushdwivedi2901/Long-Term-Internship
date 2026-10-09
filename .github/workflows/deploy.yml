@@ -88,8 +88,46 @@ jobs:
           path: capstone/dist
           retention-days: 1
 
+  # Fairshare, the expense-splitting project (fairshare/)
+  fairshare:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fairshare
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: fairshare/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Type check
+        run: npm run typecheck
+      - name: Unit, API and integration tests
+        run: npm test
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end tests (static demo build + Express/SQLite server)
+        run: npm run test:e2e
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fairshare-playwright-report
+          path: fairshare/playwright-report
+          retention-days: 7
+      - name: Build for GitHub Pages
+        run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fairshare-dist
+          path: fairshare/dist
+          retention-days: 1
+
   package:
-    needs: [portfolio, capstone]
+    needs: [portfolio, capstone, fairshare]
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
@@ -101,6 +139,10 @@ jobs:
         with:
           name: capstone-dist
           path: site/flowboard
+      - uses: actions/download-artifact@v4
+        with:
+          name: fairshare-dist
+          path: site/fairshare
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
